@@ -2,6 +2,10 @@
 
 This is a nvim repository that aims to be as easy to use as vscode.
 
+## VimScript to Lua
+
+https://www.youtube.com/watch?v=BoDU6QOmEOY
+
 ## Plugin Manager
 
 I am using [Plug](https://github.com/junegunn/vim-plug) to manage my plugins in neovim, until 0.5 version is stable will switch to [Packer](https://github.com/wbthomason/packer.nvim).
