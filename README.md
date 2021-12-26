@@ -16,6 +16,7 @@ To update all plugins on startup of nvim, please refer to [here](https://github.
 - [learning_video1](https://www.youtube.com/watch?v=gnupOrSEikQ)
 - [learning_video2](https://www.youtube.com/watch?v=65Wq4fjREUU)
 - [lua_nvim](https://www.youtube.com/watch?v=IP3J56sKtn0)
+- [new_learning_video](https://www.youtube.com/watch?v=434tljD-5C8)
 
 Github
 - [lunarvim](https://github.com/LunarVim/LunarVim)
