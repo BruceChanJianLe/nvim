@@ -4,7 +4,8 @@ This is a nvim repository that aims to be as easy to use as vscode.
 
 ## VimScript to Lua
 
-https://www.youtube.com/watch?v=BoDU6QOmEOY
+Convert init.vim to init.lua [https://www.youtube.com/watch?v=BoDU6QOmEOY]
+Setting Up init.lua [https://www.youtube.com/watch?v=qb6fPgZMRF4]
 
 ## Plugin Manager
 
