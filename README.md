@@ -11,8 +11,6 @@ Setting Up init.lua [https://www.youtube.com/watch?v=qb6fPgZMRF4]
 
 For neovim version 0.5 and above (gotta install from source) use [Packer](https://github.com/wbthomason/packer.nvim) to manage your plugins.
 
-To update all plugins on startup of nvim, please refer to [here](https://github.com/junegunn/vim-plug/wiki/extra#automatically-install-missing-plugins-on-startup)
-
 ## Reference
 - [learning_video1](https://www.youtube.com/watch?v=gnupOrSEikQ)
 - [learning_video2](https://www.youtube.com/watch?v=65Wq4fjREUU)
