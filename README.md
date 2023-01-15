@@ -9,7 +9,7 @@ Setting Up init.lua [https://www.youtube.com/watch?v=qb6fPgZMRF4]
 
 ## Plugin Manager
 
-I am using [Plug](https://github.com/junegunn/vim-plug) to manage my plugins in neovim, until 0.5 version is stable will switch to [Packer](https://github.com/wbthomason/packer.nvim).
+For neovim version 0.5 and above (gotta install from source) use [Packer](https://github.com/wbthomason/packer.nvim) to manage your plugins.
 
 To update all plugins on startup of nvim, please refer to [here](https://github.com/junegunn/vim-plug/wiki/extra#automatically-install-missing-plugins-on-startup)
 
@@ -18,6 +18,7 @@ To update all plugins on startup of nvim, please refer to [here](https://github.
 - [learning_video2](https://www.youtube.com/watch?v=65Wq4fjREUU)
 - [lua_nvim](https://www.youtube.com/watch?v=IP3J56sKtn0)
 - [new_learning_video](https://www.youtube.com/watch?v=434tljD-5C8) [https://github.com/jessarcher/dotfiles]
+- [vscode-ish setup](https://www.youtube.com/watch?v=GcoHnB5DoFA)
 
 Github
 - [current_ref_nvim_config](https://github.com/ChristianChiarulli/nvim/)
