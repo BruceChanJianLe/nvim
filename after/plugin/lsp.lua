@@ -6,6 +6,7 @@ lsp.ensure_installed({
   'tsserver',
   'sumneko_lua',
   'rust_analyzer',
+  'clangd',
 })
 
 -- Fix Undefined global 'vim'
@@ -68,3 +69,10 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true,
 })
+
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clangd
+require'lspconfig'.clangd.setup{}
+
+-- References
+-- https://www.youtube.com/watch?v=IR6pfkqjbw8
+-- https://www.youtube.com/watch?v=BCuyEdDQ5iA
