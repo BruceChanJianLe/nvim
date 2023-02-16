@@ -90,7 +90,7 @@ then
     mkdir -p $HOME/references
     cd $HOME/references
     git clone --bare https://github.com/neovim/neovim.git
-    cd NEOVIM_DIR
+    cd $NEOVIM_DIR
     git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
     git fetch
 else
@@ -123,14 +123,23 @@ then
 
     # Obtain branch name
     read -p "Neovim Branch to be used: " BRANCH
-    echo ${arr[$BRANCH]}
+    if [ -d  ${arr[$BRANCH]} ]
+    then
+        cd ${arr[$BRANCH]}
+    else
+        git worktree add ${arr[$BRANCH]} ${arr[$BRANCH]}
+        cd ${arr[$BRANCH]}
+    fi
+    
+    # Building Neovim
+    # mkdir build
+    # cd build
+    # cmake ..
+    # https://github.com/neovim/neovim/issues/3258
+    make CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make install
 
-    # if [[ -z ${arr[$BRANCH]} ]]
-    # then
-    #     docker exec --privileged -e DISPLAY=${DISPLAY} -ti $CONTAINERNAME bash
-    # else
-    #     docker exec --privileged -e DISPLAY=${DISPLAY} -ti ${arr[$CONTAINERNAME]} bash
-    # fi
+    echo -e $GREEN"Successfully installed neovim, remember to setup your alias! :)"$NOFORMAT
 
 else
     declare -a arr
@@ -144,7 +153,22 @@ else
         let "i+=1"
     done
     let "i-=1"
-    echo ${arr[$i]}
+
+    if [ -d  ${arr[$i]} ]
+    then
+        cd ${arr[$i]} 
+    else
+        git worktree add ${arr[$i]} ${arr[$i]}
+        cd ${arr[$i]}
+    fi
+
+    # Building Neovim
+    # mkdir build
+    # cd build
+    # cmake ..
+    # https://github.com/neovim/neovim/issues/3258
+    make CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make install
+
+    echo -e $GREEN"Successfully installed neovim, remember to setup your alias! :)"$NOFORMAT
 fi
-
-
