@@ -33,9 +33,11 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
--- quick fix navigation
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+-- quick fix list navigation
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
+
+-- location list navigation (has conflict with jumping panes settings)
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
