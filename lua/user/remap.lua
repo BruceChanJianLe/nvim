@@ -109,3 +109,7 @@ vim.keymap.set("n", "<leader>j", ":wincmd j<CR>")
 vim.keymap.set("n", "<leader>k", ":wincmd k<CR>")
 vim.keymap.set("n", "<leader>l", ":wincmd l<CR>")
 
+-- stay in visual mode while indenting
+vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv")
+
