@@ -10,8 +10,13 @@ return require('packer').startup(function(use)
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
 	  -- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} }
+	  requires = { 'nvim-lua/plenary.nvim',
+                 {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+      }
   }
+
+  -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
 
 --  use({
 --	  'rose-pine/neovim',
@@ -24,7 +29,7 @@ return require('packer').startup(function(use)
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('nvim-treesitter/playground')
   use('theprimeagen/harpoon')
-  use('mbbill/undotree')
+  use{'mbbill/undotree', config = [[ vim.g.undotree_SetFocusWhenToggle = 1 ]] }
   use('tpope/vim-fugitive')
   use('tpope/vim-surround')
   -- color setup
@@ -40,11 +45,11 @@ return require('packer').startup(function(use)
 
 		  -- Autocompletion
 		  {'hrsh7th/nvim-cmp'},
-		  {'hrsh7th/cmp-buffer'},
-		  {'hrsh7th/cmp-path'},
-		  {'saadparwaiz1/cmp_luasnip'},
-		  {'hrsh7th/cmp-nvim-lsp'},
-		  {'hrsh7th/cmp-nvim-lua'},
+		  {'hrsh7th/cmp-buffer'},         -- Using words buffers
+		  {'hrsh7th/cmp-path'},           -- Using file(name)s
+		  {'hrsh7th/cmp-nvim-lua'},       -- For when writing lua in nvim
+		  {'hrsh7th/cmp-nvim-lsp'},       -- LSP support and moving snippets
+		  {'saadparwaiz1/cmp_luasnip'},   -- For lua snippets
 
 		  -- Snippets
 		  {'L3MON4D3/LuaSnip'},
