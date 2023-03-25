@@ -40,3 +40,7 @@ vim.opt.updatetime = 50
 
 -- highlight column 80
 vim.opt.colorcolumn = "80"
+
+-- set default split
+vim.opt.splitbelow = true
+vim.opt.splitright = true
