@@ -1,9 +1,23 @@
 vim.g.mapleader = " "
+-- project view
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<C-E>", vim.cmd.Lex) -- until nerdtree
 
--- move lines in visual mode
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- move entire line in visual mode
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
+
+vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
+vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
+
+-- vim.keymap.set("x", "J", ":m '>+1<CR>gv-gv")
+-- vim.keymap.set("x", "K", ":m '<-2<CR>gv-gv")
+-- vim.keymap.set("x", "<A-j>", ":m '>+1<CR>gv-gv")
+-- vim.keymap.set("x", "<A-k>", ":m '<-2<CR>gv-gv")
+-- ref: https://vim.fandom.com/wiki/Moving_lines_up_or_down#:~:text=In%20normal%20mode%20or%20in,to%20move%20the%20block%20up.
 
 -- keep cursor pose for appending lines
 vim.keymap.set("n", "J", "mzJ`z")
