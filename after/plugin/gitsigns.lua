@@ -9,9 +9,7 @@ gitsigns.setup {
     change       = { text = '▎' },
     delete       = { text = '▸' },
     topdelete    = { text = '▸' },
-    changedelete = { text = '▸' },
-    untracked    = { text = '▎' },
-  },
+    changedelete = { text = '▸' }, untracked    = { text = '▎' }, },
   signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
   numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
   linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
@@ -48,9 +46,12 @@ gitsigns.setup {
   },
 }
 
--- GitSigns Remap
--- Show git info in eof
-vim.keymap.set('n', '<leader>gi', "<cmd>Gitsigns blame_line<cr>", { desc = '[S]how git commit information' })
+-- Show commit msg in floating window
+vim.keymap.set('n', '<leader>gb', gitsigns.blame_line, { desc = '[S]how git commit information' })
 -- Preview git hunk
-vim.keymap.set('n', '<leader>gh', "<cmd>Gitsigns preview_hunk<cr>", { desc = '[P]review hunk information' })
+vim.keymap.set('n', '<leader>gi', gitsigns.preview_hunk_inline, { desc = '[P]review hunk information' })
+-- Preview git hunk
+vim.keymap.set('n', '<leader>gj', gitsigns.next_hunk, { desc = '[J]ump to next hunk' })
+-- Preview git hunk
+vim.keymap.set('n', '<leader>gk', gitsigns.prev_hunk, { desc = '[J]ump to previous hunk' })
 
