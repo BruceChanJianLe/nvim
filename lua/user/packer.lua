@@ -22,8 +22,11 @@ return require('packer').startup(function(use)
   use('nvim-treesitter/playground')
   use('theprimeagen/harpoon')
   use{'mbbill/undotree', config = [[ vim.g.undotree_SetFocusWhenToggle = 1 ]] }
-  use('tpope/vim-fugitive')
+
+  -- Text object manipulation
   use('tpope/vim-surround')
+  use('wellle/targets.vim')
+
   -- color setup
   use('RRethy/nvim-base16')
 
