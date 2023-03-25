@@ -51,7 +51,7 @@ vim.keymap.set('n', '<leader>gb', gitsigns.blame_line, { desc = '[S]how git comm
 -- Preview git hunk
 vim.keymap.set('n', '<leader>gi', gitsigns.preview_hunk_inline, { desc = '[P]review hunk information' })
 -- Preview git hunk
-vim.keymap.set('n', '<leader>gj', gitsigns.next_hunk, { desc = '[J]ump to next hunk' })
+vim.keymap.set('n', ']c', gitsigns.next_hunk, { desc = '[J]ump to next hunk' })
 -- Preview git hunk
-vim.keymap.set('n', '<leader>gk', gitsigns.prev_hunk, { desc = '[J]ump to previous hunk' })
+vim.keymap.set('n', '[c', gitsigns.prev_hunk, { desc = '[J]ump to previous hunk' })
 
