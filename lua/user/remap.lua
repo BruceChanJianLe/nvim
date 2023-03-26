@@ -1,17 +1,17 @@
 vim.g.mapleader = " "
 -- project view
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<C-E>", vim.cmd.Lex) -- until nerdtree
+vim.keymap.set("n", "<leader>pv", vim.cmd.Lex, { desc = '[P]roject [V]iew' })
+-- vim.keymap.set("n", "<C-E>", vim.cmd.Lex, { desc = 'follow vscode shortcut' }) -- until nerdtree
 
 -- move entire line in visual mode
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = 'move entire line down in visual mode'})
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = 'move entire line up in visual mode'})
 
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = 'move entire line down in normal mode'})
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = 'move entire line up in normal mode'})
 
-vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
-vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
+vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = 'move entire line down in insert mode'})
+vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = 'move entire line up in insert mode'})
 
 -- vim.keymap.set("x", "J", ":m '>+1<CR>gv-gv")
 -- vim.keymap.set("x", "K", ":m '<-2<CR>gv-gv")
