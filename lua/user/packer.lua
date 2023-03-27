@@ -57,4 +57,7 @@ return require('packer').startup(function(use)
   use('tpope/vim-fugitive')
   use {'lewis6991/gitsigns.nvim'}
 
+  -- Commenting
+  use{'numToStr/Comment.nvim'}
+
 end)
