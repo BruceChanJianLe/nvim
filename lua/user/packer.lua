@@ -29,6 +29,7 @@ return require('packer').startup(function(use)
 
   -- color setup
   use('RRethy/nvim-base16')
+  use{"lukas-reineke/indent-blankline.nvim"}
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',
@@ -55,7 +56,7 @@ return require('packer').startup(function(use)
 
   -- Git plugins
   use('tpope/vim-fugitive')
-  use {'lewis6991/gitsigns.nvim'}
+  use{'lewis6991/gitsigns.nvim'}
 
   -- Commenting
   use{'numToStr/Comment.nvim'}
