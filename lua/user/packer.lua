@@ -54,7 +54,10 @@ return require('packer').startup(function(use)
 	  }
   }
 
+  -- Autocompletion for pairs
   use {"windwp/nvim-autopairs"}
+  -- Tabout from pairs
+  use {'abecodes/tabout.nvim'}
 
   -- Git plugins
   use('tpope/vim-fugitive')
