@@ -170,5 +170,6 @@ else
     make CMAKE_BUILD_TYPE=RelWithDebInfo
     sudo make install
 
-    echo -e $GREEN"Successfully installed neovim, remember to setup your alias! :)"$NOFORMAT
+    echo -e $GREEN"Successfully installed neovim, remember to setup your alias!:)\n
+    install ripgrep and UbuntuMono size 13 :)"$NOFORMAT
 fi
