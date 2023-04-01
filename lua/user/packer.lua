@@ -54,6 +54,11 @@ return require('packer').startup(function(use)
 	  }
   }
 
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
+
   -- Git plugins
   use('tpope/vim-fugitive')
   use{'lewis6991/gitsigns.nvim'}
