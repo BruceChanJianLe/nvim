@@ -21,7 +21,7 @@ return require('packer').startup(function(use)
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('nvim-treesitter/playground')
   use('theprimeagen/harpoon')
-  use{'mbbill/undotree', config = [[ vim.g.undotree_SetFocusWhenToggle = 1 ]] }
+  use{'mbbill/undotree'}
 
   -- Text object manipulation
   use('tpope/vim-surround')
@@ -60,5 +60,14 @@ return require('packer').startup(function(use)
 
   -- Commenting
   use{'numToStr/Comment.nvim'}
+
+  -- Statusline
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
+
+  -- Terminal
+  use {"akinsho/toggleterm.nvim", tag = '*'}
 
 end)
