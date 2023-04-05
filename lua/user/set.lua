@@ -44,3 +44,12 @@ vim.opt.colorcolumn = "80"
 -- set default split
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+
+if vim.fn.executable("rg") then
+  -- if ripgrep installed, use that as a grepper
+  vim.opt.grepprg = "rg --vimgrep --no-heading"
+  vim.opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
+  -- create autocmd to automatically open quickfix window when grepping
+  vim.cmd [[autocmd QuickFixCmdPost [^l]* nested cwindow]]
+end
+
