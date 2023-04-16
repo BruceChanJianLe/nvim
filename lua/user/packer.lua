@@ -77,6 +77,13 @@ return require('packer').startup(function(use)
   use {"akinsho/toggleterm.nvim", tag = '*'}
 
   -- Buffer tabs
-  use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
+  use {
+    'akinsho/bufferline.nvim',
+    tag = "v3.*",
+    requires = {
+      'nvim-tree/nvim-web-devicons',
+      'famiu/bufdelete.nvim'
+    }
+  }
 
 end)
