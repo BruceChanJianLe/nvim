@@ -35,7 +35,7 @@ npairs.setup {
 }
 
 -- Add angle bracket rule
-npairs.add_rule(Rule("<", ">"))
+-- npairs.add_rule(Rule("<", ">"))
 
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 local cmp_status_ok, cmp = pcall(require, "cmp")
