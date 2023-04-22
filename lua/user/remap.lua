@@ -5,14 +5,14 @@ vim.g.netrw_winsize = 30
 -- vim.keymap.set("n", "<C-E>", vim.cmd.Lex, { desc = 'follow vscode shortcut' }) -- until nerdtree
 
 -- move entire line in visual mode
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = 'move entire line down in visual mode'})
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = 'move entire line up in visual mode'})
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = 'move entire line down in visual mode' })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = 'move entire line up in visual mode' })
 
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = 'move entire line down in normal mode'})
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = 'move entire line up in normal mode'})
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = 'move entire line down in normal mode' })
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = 'move entire line up in normal mode' })
 
-vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = 'move entire line down in insert mode'})
-vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = 'move entire line up in insert mode'})
+vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = 'move entire line down in insert mode' })
+vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = 'move entire line up in insert mode' })
 
 -- vim.keymap.set("x", "J", ":m '>+1<CR>gv-gv")
 -- vim.keymap.set("x", "K", ":m '<-2<CR>gv-gv")
@@ -33,11 +33,11 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- yank to system buffer
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- delete to system buffer
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- This is going to get me cancelled
 vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -79,41 +79,41 @@ vim.keymap.set("n", "<leader>x", ":x<CR>")
 
 -- toggle line number
 function ToggleLineNumber()
-    if (vim.o.number and vim.o.relativenumber) then
-        vim.o.number = false
-        vim.o.relativenumber = false
-        print("Toggle line numbers OFF")
-    else
-        vim.o.number = true
-        vim.o.relativenumber = true
-        print("Toggle line numbers ON")
-    end
+  if (vim.o.number and vim.o.relativenumber) then
+    vim.o.number = false
+    vim.o.relativenumber = false
+    print("Toggle line numbers OFF")
+  else
+    vim.o.number = true
+    vim.o.relativenumber = true
+    print("Toggle line numbers ON")
+  end
 end
 
 vim.keymap.set("n", "<leader>n", ":lua ToggleLineNumber()<CR>")
 
 -- toggele line wrap
 function ToggleTextWrap()
-    if (vim.o.wrap) then
-        vim.o.wrap = false
-        print("Toggle test wrap OFF")
-    else
-        vim.o.wrap = true
-        print("Toggle test wrap ON")
-    end
+  if (vim.o.wrap) then
+    vim.o.wrap = false
+    print("Toggle test wrap OFF")
+  else
+    vim.o.wrap = true
+    print("Toggle test wrap ON")
+  end
 end
 
 vim.keymap.set("n", "<leader><leader>z", ":lua ToggleTextWrap()<CR>")
 
 -- toggle paste format
 function TogglePasteFormat()
-    if (vim.o.paste) then
-        vim.o.paste = false
-        print("Toggle paste format OFF")
-    else
-        vim.o.paste = true
-        print("Toggle paste format ON")
-    end
+  if (vim.o.paste) then
+    vim.o.paste = false
+    print("Toggle paste format OFF")
+  else
+    vim.o.paste = true
+    print("Toggle paste format ON")
+  end
 end
 
 vim.keymap.set("n", "<leader><leader>p", ":lua TogglePasteFormat()ToggleTextWrap<CR>")
