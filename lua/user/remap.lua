@@ -1,8 +1,7 @@
 vim.g.mapleader = " "
 -- project view
-vim.keymap.set("n", "<leader>pv", vim.cmd.Lex, { desc = '[P]roject [V]iew' })
-vim.g.netrw_winsize = 30
--- vim.keymap.set("n", "<C-E>", vim.cmd.Lex, { desc = 'follow vscode shortcut' }) -- until nerdtree
+vim.keymap.set("n", "<leader>pv", "<cmd>NeoTreeFocusToggle<CR>", { desc = '[P]roject [V]iew' })
+vim.keymap.set("n", "<C-b>", "<cmd>NeoTreeFocusToggle<CR>", { desc = 'Follow vscode convention' })
 
 -- move entire line in visual mode
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = 'move entire line down in visual mode' })

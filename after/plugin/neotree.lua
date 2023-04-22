@@ -84,7 +84,7 @@ neotree.setup({
     mappings = {
       ["<space>"] = {
         "toggle_node",
-        nowait = true,   -- disable `nowait` if you have existing combos starting with this char that you want to use
+        nowait = false,   -- disable `nowait` if you have existing combos starting with this char that you want to use
       },
       ["<2-LeftMouse>"] = "open",
       ["l"] = "open",
