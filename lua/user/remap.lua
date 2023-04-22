@@ -45,7 +45,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 -- do nothing for Q
 vim.keymap.set("n", "Q", "<nop>")
 -- start a new project
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+-- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>") -- Not in used
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 -- quick fix list navigation
