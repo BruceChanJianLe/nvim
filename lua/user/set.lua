@@ -53,3 +53,6 @@ if vim.fn.executable("rg") then
   vim.cmd [[autocmd QuickFixCmdPost [^l]* nested cwindow]]
 end
 
+-- use mouse in all case
+vim.opt.mouse = "a"
+
