@@ -134,3 +134,9 @@ vim.keymap.set("n", "<A-x>", "0")
 -- append lines in insert mode
 vim.keymap.set("n", "<leader>o", "mpo<esc>`p")
 vim.keymap.set("n", "<leader>O", "mpO<esc>`p")
+
+-- Resize Windows
+vim.keymap.set({ "n", "v" }, "<C-Left>",  "<C-w><")
+vim.keymap.set({ "n", "v" }, "<C-Right>", "<C-w>>")
+vim.keymap.set({ "n", "v" }, "<C-Down>",  "<C-w>+")
+vim.keymap.set({ "n", "v" }, "<C-Up>",    "<C-w>-")
