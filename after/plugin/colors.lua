@@ -24,8 +24,8 @@ vscode_theme.load()
 
 -- All builtin colorschemes can be accessed with |:colorscheme|.
 function ColorMyPencils(color)
-  color = color or "base16-gruvbox-dark-pale" -- Keep for reference
-  -- color = color or "vscode"
+  -- color = color or "base16-gruvbox-dark-pale" -- Keep for reference
+  color = color or "vscode"
   vim.cmd.colorscheme(color)
 
   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })

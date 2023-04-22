@@ -128,3 +128,10 @@ vim.keymap.set("n", "<leader>l", ":wincmd l<CR>")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "<", "<gv")
 
+-- increment and decrement from beginning of line
+vim.keymap.set("n", "<A-a>", "0")
+vim.keymap.set("n", "<A-x>", "0")
+
+-- append lines in insert mode
+vim.keymap.set("n", "<leader>o", "mpo<esc>`p")
+vim.keymap.set("n", "<leader>O", "mpO<esc>`p")
