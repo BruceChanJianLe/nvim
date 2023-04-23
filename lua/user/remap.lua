@@ -65,6 +65,7 @@ vim.keymap.set("n", "<leader>s", ":se syn=")
 
 -- save all files
 vim.keymap.set("n", "<leader>w", ":wa<CR>")
+vim.keymap.set("v", "<leader>w", ":<BS><BS><BS><BS><BS>wa<CR>gv")
 
 -- revert edit
 vim.keymap.set("n", "<leader>e", ":e!<CR>")
