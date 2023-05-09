@@ -81,7 +81,7 @@ CURRENT_DIR="$(pwd)"
 if [[ $DEPS == "true" ]]
 then
     echo "Installing depedencies for building neovim..."
-    sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
+    sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen -y
 fi    
 
 # Checks if neovim directory already exists
