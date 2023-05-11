@@ -3,7 +3,7 @@ local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-  'tsserver',
+  -- 'tsserver',
   'lua_ls',
   'rust_analyzer',
   'clangd',
@@ -21,22 +21,71 @@ lsp.configure('lua_ls', {
 })
 
 local cmp = require('cmp')
+local luasnip = require('luasnip')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
-  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-  ["<C-Space>"] = cmp.mapping.complete(),
-})
+
+luasnip.config.setup {}
+
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert {
+    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-u>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete {},
+    ['<C-y>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<C-j>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<C-k>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+}
+
+
+-- local cmp_select = {behavior = cmp.SelectBehavior.Select}
+-- local cmp_mappings = lsp.defaults.cmp_mappings({
+--   ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+--   ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+--   ['<C-y>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+--   ["<C-Space>"] = cmp.mapping.complete(),
+--   ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+--   ['<C-u>'] = cmp.mapping.scroll_docs(4),
+-- })
 
 -- disable completion with tab
 -- this helps with copilot setup
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
+-- cmp_mappings['<Tab>'] = nil
+-- cmp_mappings['<S-Tab>'] = nil
 
-lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
-})
+-- lsp.setup_nvim_cmp({
+--   mapping = cmp_mappings
+-- })
 
 lsp.set_preferences({
     suggest_lsp_servers = false,
