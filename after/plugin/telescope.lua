@@ -28,6 +28,7 @@ vim.keymap.set('n', "<leader>fr", "<cmd>lua require('telescope').extensions.live
 
 -- Enable telescope fzf native, if installed
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('luasnip')
 
 -- fuzzy find in current file
 function SearchFile()
