@@ -52,9 +52,9 @@ return require('packer').startup(function(use)
       { 'saadparwaiz1/cmp_luasnip' }, -- For lua snippets
 
       -- Snippets
-      { 'L3MON4D3/LuaSnip' },
+      { 'L3MON4D3/LuaSnip',},
       -- Snippet Collection (Optional)
-      { 'rafamadriz/friendly-snippets' },
+      { "brucechanjianle/friendly-snippets" }
     }
   }
 

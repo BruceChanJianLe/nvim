@@ -103,7 +103,7 @@ function ToggleTextWrap()
   end
 end
 
-vim.keymap.set("n", "<leader><leader>z", ":lua ToggleTextWrap()<CR>")
+vim.keymap.set("n", "<A-z>", ":lua ToggleTextWrap()<CR>")
 
 -- toggle paste format
 function TogglePasteFormat()
@@ -116,7 +116,7 @@ function TogglePasteFormat()
   end
 end
 
-vim.keymap.set("n", "<leader><leader>p", ":lua TogglePasteFormat()ToggleTextWrap<CR>")
+vim.keymap.set("n", "<leader><leader>p", ":lua TogglePasteFormat()<CR>")
 
 -- jumping between panes
 vim.keymap.set("n", "<leader>h", ":wincmd h<CR>")
@@ -141,3 +141,21 @@ vim.keymap.set({ "n", "v" }, "<C-Left>",  "<C-w><")
 vim.keymap.set({ "n", "v" }, "<C-Right>", "<C-w>>")
 vim.keymap.set({ "n", "v" }, "<C-Down>",  "<C-w>+")
 vim.keymap.set({ "n", "v" }, "<C-Up>",    "<C-w>-")
+
+-- toggle split zoom
+IS_ZOOM = false
+function ToggleZoom()
+  if (IS_ZOOM) then
+    vim.api.nvim_command("norm =")
+    print("Zoom Out")
+    IS_ZOOM = false
+  else
+    vim.api.nvim_command("norm _|")
+    print("Zoom In")
+    IS_ZOOM = true
+  end
+end
+vim.keymap.set("n", "<leader>z", ":lua ToggleZoom()<CR>")
+
+vim.keymap.set("i", "<C-l>", "<C-Right>")
+vim.keymap.set("i", "<C-h>", "<C-Left>")

@@ -138,6 +138,9 @@ luasnip.config.set_config {
   enable_autosnippets = true,
 }
 
+-- Use friendly-snippets
+require("luasnip.loaders.from_vscode").lazy_load()
+
 vim.diagnostic.config({
     virtual_text = true,
 })
@@ -148,3 +151,7 @@ require'lspconfig'.clangd.setup{}
 -- References
 -- https://www.youtube.com/watch?v=IR6pfkqjbw8
 -- https://www.youtube.com/watch?v=BCuyEdDQ5iA
+
+-- Creating your own snippets
+-- https://github.com/one-harsh/vscode-cpp-snippets/blob/master/snippets/cpp.json
+-- VSCODE snippets: https://github.com/one-harsh/vscode-cpp-snippets
