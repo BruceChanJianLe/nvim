@@ -10,82 +10,66 @@ lsp.ensure_installed({
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure('lua_ls', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-})
+lsp.nvim_workspace()
+-- lsp.configure('lua_ls', {
+--     settings = {
+--         Lua = {
+--             diagnostics = {
+--                 globals = { 'vim' }
+--             }
+--         }
+--     }
+-- })
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
-luasnip.config.setup {}
+local cmp_mappings = lsp.defaults.cmp_mappings({
+  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+  ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+  ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+  ['<C-Space>'] = cmp.mapping.complete(),
+  ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+  ['<C-d>'] = cmp.mapping.scroll_docs(4),
+  ['<C-j>'] = cmp.mapping(function(--[[ fallback ]])
+    -- if cmp.visible() then
+    --   cmp.select_next_item()
+    -- elseif luasnip.expand_or_jumpable() then
+    --   luasnip.expand_or_jump()
+    -- else
+    --   fallback()
+    if cmp.visible() then
+      cmp.select_next_item()
+    elseif luasnip.expand_or_jumpable() then
+      luasnip.expand_or_jump()
+    end
+  end, { 'i', 's' }),
+  ['<C-k>'] = cmp.mapping(function(--[[ fallback ]])
+    -- if cmp.visible() then
+    --   cmp.select_prev_item()
+    -- elseif luasnip.jumpable(-1) then
+    -- luasnip.jump(-1)
+    -- else
+    --   fallback()
+    -- end
+    if cmp.visible() then
+      cmp.select_prev_item()
+    elseif luasnip.jumpable(-1) then
+      luasnip.jump(-1)
+    end
+  end, { 'i', 's' }),
+})
 
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert {
-    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-d>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
-    ['<C-y>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<C-j>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<C-k>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
-}
-
-
--- local cmp_select = {behavior = cmp.SelectBehavior.Select}
--- local cmp_mappings = lsp.defaults.cmp_mappings({
---   ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
---   ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
---   ['<C-y>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
---   ["<C-Space>"] = cmp.mapping.complete(),
---   ['<C-d>'] = cmp.mapping.scroll_docs(-4),
---   ['<C-u>'] = cmp.mapping.scroll_docs(4),
--- })
-
--- disable completion with tab
--- this helps with copilot setup
+-- Disable Tabs
 -- cmp_mappings['<Tab>'] = nil
--- cmp_mappings['<S-Tab>'] = nil
+cmp_mappings['<S-Tab>'] = nil
 
--- lsp.setup_nvim_cmp({
---   mapping = cmp_mappings
--- })
+-- Setup lsp mappings
+lsp.setup_nvim_cmp({
+  mapping = cmp_mappings
+})
 
 lsp.set_preferences({
     suggest_lsp_servers = false,
@@ -113,6 +97,46 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.setup()
+
+-- Setup other completion after lsp-zero
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  -- completion = {
+  --   autocomplete = false,
+  -- },
+
+  -- Order of sources matter, top has higher priority
+  -- Configure: keyword_length, priority, max_item_count
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+    { name = 'buffer', keyword_length = 5 },
+    { name = 'path' },
+  },
+
+  experimental = {
+    -- Display virutal text
+    -- This feature conflict with copilot.vim's preview
+    -- Set to false if using copilot.vim
+    ghost_text = { true, hl_group = 'LineNr' }
+  }
+}
+
+luasnip.config.set_config {
+  -- This tells LuaSnip to remember to keep around the last snippet.
+  -- You can jump back into it even if you move outside of the selection
+  history = false,
+
+  -- This one is cool cause if you have dynamic snippets, it updates as you type!
+  updateevents = "TextChanged,TextChangedI",
+
+  -- Autosnippets:
+  enable_autosnippets = true,
+}
 
 vim.diagnostic.config({
     virtual_text = true,
