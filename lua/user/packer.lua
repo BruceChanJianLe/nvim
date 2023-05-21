@@ -30,7 +30,7 @@ return require('packer').startup(function(use)
 
   -- color setup
   use('RRethy/nvim-base16')
-  -- use{"lukas-reineke/indent-blankline.nvim"}
+  use{"lukas-reineke/indent-blankline.nvim"}
   use { "Mofiqul/vscode.nvim" }
 
   use {
@@ -83,7 +83,7 @@ return require('packer').startup(function(use)
     tag = "v3.*",
     requires = {
       'nvim-tree/nvim-web-devicons',
-      'famiu/bufdelete.nvim'
+      'moll/vim-bbye'
     }
   }
 
