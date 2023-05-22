@@ -101,4 +101,11 @@ return require('packer').startup(function(use)
     }
   }
   use("nvim-tree/nvim-web-devicons")  -- For icons!
+
+  -- Markdown preview
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
 end)
