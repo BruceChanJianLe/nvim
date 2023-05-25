@@ -19,4 +19,37 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+
+  -- Function / Class highlights
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = 'va',
+      node_incremental = 'va',
+      -- scope_incremental = '<c-s>',
+      node_decremental = 'vd',
+    },
+  },
+
+  -- Functions / Classes jump
+  move = {
+    enable = true,
+    set_jumps = true, -- whether to set jumps in the jumplist
+    goto_next_start = {
+      [']m'] = '@function.outer',
+      [']]'] = '@class.outer',
+    },
+    goto_next_end = {
+      [']M'] = '@function.outer',
+      [']['] = '@class.outer',
+    },
+    goto_previous_start = {
+      ['[m'] = '@function.outer',
+      ['[['] = '@class.outer',
+    },
+    goto_previous_end = {
+      ['[M'] = '@function.outer',
+      ['[]'] = '@class.outer',
+    },
+  },
 }
