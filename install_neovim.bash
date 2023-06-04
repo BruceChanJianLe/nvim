@@ -5,14 +5,14 @@ script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 
 usage() {
   cat <<EOF
-Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-r] [-d]
-Script description here.
-Available options:
--h, --help          Print this help and exit
--a, --auto          Set true to auto select the last branch in the list
--d, --depedencies   Set false to not install depedencies, true by default
+  Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-r] [-d]
+  Script description here.
+  Available options:
+  -h, --help          Print this help and exit
+  -a, --auto          Set true to auto select the last branch in the list
+  -d, --depedencies   Set false to not install depedencies, true by default
 EOF
-  exit
+exit
 }
 
 setup_colors() {
@@ -43,27 +43,27 @@ parse_params() {
 
   while test $# -gt 0; do
     case $1 in
-    -h | --help) usage ;;
-    -a | --auto)
-      shift
-      if [[ $1 == "true" || $1 == "false" ]]
-      then
+      -h | --help) usage ;;
+      -a | --auto)
+        shift
+        if [[ $1 == "true" || $1 == "false" ]]
+        then
           AUTO_SELECT=$1
-      else
-        die "-a only accepts true or false."
-      fi
-      ;;
-    -d | --depedencies)
-      shift
-      if [[ $1 == "true" || $1 == "false" ]]
-      then
-        DEPS=$1
-      else
-        die "-d only accepts true or false."
-      fi
-      ;;
-    -?*) die "Unknown option: $1" ;;
-    *) break ;;
+        else
+          die "-a only accepts true or false."
+        fi
+        ;;
+      -d | --depedencies)
+        shift
+        if [[ $1 == "true" || $1 == "false" ]]
+        then
+          DEPS=$1
+        else
+          die "-d only accepts true or false."
+        fi
+        ;;
+      -?*) die "Unknown option: $1" ;;
+      *) break ;;
     esac
     shift
   done
@@ -80,57 +80,57 @@ CURRENT_DIR="$(pwd)"
 # Install build depedencies for neovim
 if [[ $DEPS == "true" ]]
 then
-    echo "Installing depedencies for building neovim..."
-    sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen -y -qq
-fi    
+  echo "Installing depedencies for building neovim..."
+  sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen ripgrep -y -qq
+fi
 
 # Checks if neovim directory already exists
 if [ ! -d "$NEOVIM_DIR" ]
 then
-    mkdir -p $HOME/references
-    cd $HOME/references
-    git clone --bare https://github.com/neovim/neovim.git
-    cd $NEOVIM_DIR
-    git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-    git fetch
+  mkdir -p $HOME/references
+  cd $HOME/references
+  git clone --bare https://github.com/neovim/neovim.git
+  cd $NEOVIM_DIR
+  git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+  git fetch
 else
-    cd $NEOVIM_DIR
-    git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-    git fetch
+  cd $NEOVIM_DIR
+  git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+  git fetch
 fi
 
 if [[ $AUTO_SELECT == "false" ]]
 then
-    # Display all available branches
-    echo "Available branches:"
-    declare -a arr
-    i=0
+  # Display all available branches
+  echo "Available branches:"
+  declare -a arr
+  i=0
 
     # Make branches name into an array
     branches=$(git for-each-ref refs  --format='%(refname)' | grep origin | cut -d/ -f4)
     for branch in $branches
     do
-        arr[$i]=$branch
-        let "i+=1"
+      arr[$i]=$branch
+      let "i+=1"
     done
 
     # Loop through name array
     let "i-=1"
     for j in $(seq 0 $i)
     do
-        echo $j")" ${arr[$j]}
+      echo $j")" ${arr[$j]}
     done
 
     # Obtain branch name
     read -p "Neovim Branch to be used: " BRANCH
     if [ -d  ${arr[$BRANCH]} ]
     then
-        cd ${arr[$BRANCH]}
+      cd ${arr[$BRANCH]}
     else
-        git worktree add ${arr[$BRANCH]} ${arr[$BRANCH]}
-        cd ${arr[$BRANCH]}
+      git worktree add ${arr[$BRANCH]} ${arr[$BRANCH]}
+      cd ${arr[$BRANCH]}
     fi
-    
+
     # Building Neovim
     # mkdir build
     # cd build
@@ -141,7 +141,7 @@ then
 
     echo -e $GREEN"Successfully installed neovim, remember to setup your alias! :)"$NOFORMAT
 
-else
+  else
     declare -a arr
     i=0
 
@@ -149,17 +149,17 @@ else
     branches=$(git for-each-ref refs  --format='%(refname)' | grep origin | cut -d/ -f4)
     for branch in $branches
     do
-        arr[$i]=$branch
-        let "i+=1"
+      arr[$i]=$branch
+      let "i+=1"
     done
     let "i-=1"
 
     if [ -d  ${arr[$i]} ]
     then
-        cd ${arr[$i]} 
+      cd ${arr[$i]} 
     else
-        git worktree add ${arr[$i]} ${arr[$i]}
-        cd ${arr[$i]}
+      git worktree add ${arr[$i]} ${arr[$i]}
+      cd ${arr[$i]}
     fi
 
     # Building Neovim
@@ -171,5 +171,5 @@ else
     sudo make install
 
     echo -e $GREEN"Successfully installed neovim, remember to setup your alias!:)\n
-    install ripgrep and UbuntuMono size 13 :)"$NOFORMAT
+    Use Bitstream Vera Sans Mono size 11 :)"$NOFORMAT
 fi
