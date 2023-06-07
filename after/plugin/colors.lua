@@ -34,7 +34,8 @@ function ColorMyPencils(color)
 
 end
 
-vim.keymap.set("n", "<leader>c", "<cmd>lua ColorMyPencils()<CR>")
+-- Never used this thusfar
+-- vim.keymap.set("n", "<leader>c", "<cmd>lua ColorMyPencils()<CR>")
 
 ColorMyPencils()
 -- vim.cmd('colorscheme base16-gruvbox-dark-hard')
