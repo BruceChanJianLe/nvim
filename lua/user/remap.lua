@@ -159,5 +159,7 @@ function ToggleZoom()
 end
 vim.keymap.set("n", "<leader>z", ":lua ToggleZoom()<CR>")
 
-vim.keymap.set("i", "<C-l>", "<C-Right>")
-vim.keymap.set("i", "<C-h>", "<C-Left>")
+vim.keymap.set("i", "<C-l>", "<Right>")
+vim.keymap.set("i", "<C-h>", "<Left>")
+vim.keymap.set("i", "<A-l>", "<C-Right>")
+vim.keymap.set("i", "<A-h>", "<C-Left>")
