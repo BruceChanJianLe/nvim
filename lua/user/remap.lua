@@ -58,7 +58,18 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- handy search and replace
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[R]eplace Text' })
+-- find and replace in quick fix
+vim.keymap.set("v", "<leader><C-R>", [["hy<CR>:cdo %s/<C-r>h//gI<Left><Left><Left>]], { desc = '[C]do [R]eplace Normal Mode' })
+vim.keymap.set("n", "<leader><C-R>", [["hyiw<CR>:cdo %s/<C-r>h//gI<Left><Left><Left>]], { desc = '[C]do [R]eplace Visual Mode' })
+vim.keymap.set("n", "<leader>@", [[:cdo norm @]], { desc = 'Cdo replace with [@] macro' })
+-- References
+-- https://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text (READ)
+-- https://vim.fandom.com/wiki/Search_for_visually_selected_text
+-- https://vi.stackexchange.com/questions/20077/automatically-highlight-all-occurrences-of-the-selected-text-in-visual-mode
+-- https://superuser.com/questions/41378/how-to-search-for-selected-text-in-vim
+-- getting text for visually selected text (https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript)
+
 -- make current file executable
 vim.keymap.set("n", "<leader><leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
