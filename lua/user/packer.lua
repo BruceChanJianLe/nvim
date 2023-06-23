@@ -108,4 +108,7 @@ return require('packer').startup(function(use)
     run = function() vim.fn["mkdp#util#install"]() end,
   })
 
+  -- Use by tmux resurrect
+  use {'tpope/vim-obsession'}
+
 end)
