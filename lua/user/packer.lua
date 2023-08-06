@@ -109,6 +109,11 @@ return require('packer').startup(function(use)
   })
 
   -- Use by tmux resurrect
-  use {'tpope/vim-obsession'}
+  use {
+    'tpope/vim-obsession',
+    requires = {
+      'tpope/vim-repeat'
+    }
+  }
 
 end)
