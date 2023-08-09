@@ -60,8 +60,8 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 -- handy search and replace
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[R]eplace Text' })
 -- find and replace in quick fix
-vim.keymap.set("v", "<leader><C-R>", [["hy<CR>:cdo %s/<C-r>h//gI<Left><Left><Left>]], { desc = '[C]do [R]eplace Normal Mode' })
-vim.keymap.set("n", "<leader><C-R>", [["hyiw<CR>:cdo %s/<C-r>h//gI<Left><Left><Left>]], { desc = '[C]do [R]eplace Visual Mode' })
+vim.keymap.set("v", "<leader><C-R>", [["hy<CR>:cdo %s/<C-r>h//gI<Left><Left><Left>]], { desc = '[C]do [R]eplace Visual Mode' })
+vim.keymap.set("n", "<leader><C-R>", [["hyiw<CR>:cdo %s/<C-r>h//gI<Left><Left><Left>]], { desc = '[C]do [R]eplace Normal Mode' })
 vim.keymap.set("n", "<leader>@", [[:cdo norm @]], { desc = 'Cdo replace with [@] macro' })
 -- References
 -- https://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text (READ)
