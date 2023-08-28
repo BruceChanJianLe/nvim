@@ -73,8 +73,8 @@ vim.keymap.set("n", "<leader>@", [[:cdo norm @]], { desc = 'Cdo replace with [@]
 -- make current file executable
 vim.keymap.set("n", "<leader><leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
--- set syntax
-vim.keymap.set("n", "<leader>s", ":se syn=")
+-- set filetype
+vim.keymap.set("n", "<leader>s", ":se ft=")
 
 -- save all files
 vim.keymap.set("n", "<leader>w", ":wa<CR>")
