@@ -87,8 +87,8 @@ fi
 # Checks if neovim directory already exists
 if [ ! -d "$NEOVIM_DIR" ]
 then
-  mkdir -p $HOME/references
-  cd $HOME/references
+  mkdir -p $HOME/reference
+  cd $HOME/reference
   git clone --bare https://github.com/neovim/neovim.git
   cd $NEOVIM_DIR
   git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
