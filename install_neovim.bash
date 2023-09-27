@@ -39,7 +39,7 @@ parse_params() {
   AUTO_SELECT="false"
   BRANCH=""
   DEPS="true"
-  NEOVIM_DIR="$HOME/references/neovim.git"
+  NEOVIM_DIR="$HOME/reference/neovim.git"
 
   while test $# -gt 0; do
     case $1 in
