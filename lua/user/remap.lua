@@ -78,7 +78,8 @@ vim.keymap.set("n", "<leader>s", ":se ft=")
 
 -- save all files
 vim.keymap.set("n", "<leader>w", ":wa<CR>")
-vim.keymap.set("v", "<leader>w", ":<BS><BS><BS><BS><BS>wa<CR>gv")
+vim.keymap.set("v", "<leader>w", ":<BS><BS><BS><BS><BS>wa<CR>gv", { desc = 'Sudo save, hence, the exclamation!' })
+vim.keymap.set("n", "<leader>W", ":w !sudo tee %")
 
 -- revert edit
 vim.keymap.set("n", "<leader>e", ":e!<CR>")
