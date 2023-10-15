@@ -57,8 +57,9 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- handy search and replace
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[R]eplace Text' })
-vim.keymap.set("v", "<leader>r", [["hy<CR>:%s/<C-r>h/<C-r>h/gI<Left><Left><Left>]], { desc = '[R]eplace Text' })
+vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Search and [R]eplace Text Under Cursor' })
+vim.keymap.set("v", "<leader>r", [["hy<CR>:%s/<C-r>h/<C-r>h/gI<Left><Left><Left>]], { desc = 'Search and [R]eplace Current Highlighted Text' })
+vim.keymap.set("v", "<C-R>", [[:s/\%V\//gI<Left><Left><Left><Left>]], { desc = 'Search and [R]eplace for Input in Highlighted Text' })
 -- find and replace in quick fix
 vim.keymap.set("v", "<leader><C-R>", [["hy<CR>:cdo %s/<C-r>h//gI<Left><Left><Left>]], { desc = '[C]do [R]eplace Visual Mode' })
 vim.keymap.set("n", "<leader><C-R>", [["hyiw<CR>:cdo %s/<C-r>h//gI<Left><Left><Left>]], { desc = '[C]do [R]eplace Normal Mode' })
