@@ -53,7 +53,7 @@ local esc = vim.api.nvim_replace_termcodes(
 
 -- Toggle current line (linewise) using C-/
 vim.keymap.set('n', '<C-_>', api.toggle.linewise.current)
-vim.keymap.set('i', '<C-_>', [[<ESC>:norm lmp<CR>`p]])
+vim.keymap.set('i', '<C-_>', [[<ESC>:norm lmo<CR>`o]])
 -- Toggle selection (linewise)
 vim.keymap.set('x', '<C-_>', function()
   vim.api.nvim_feedkeys(esc, 'nx', false)
