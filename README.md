@@ -22,9 +22,3 @@ Github
 - [vscodevim](https://github.com/josethz00/neovim-like-vscode)
 - [someref](https://gist.github.com/benawad/b768f5a5bbd92c8baabd363b7e79786f)
 - [luaref](https://github.com/mizlan/dots-nightly/tree/lua-port)
-
-### VimScript to Lua
-
-Convert init.vim to init.lua [https://www.youtube.com/watch?v=BoDU6QOmEOY]
-Setting Up init.lua [https://www.youtube.com/watch?v=qb6fPgZMRF4]
-
