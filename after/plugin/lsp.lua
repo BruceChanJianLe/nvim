@@ -99,9 +99,9 @@ end)
 lsp.setup()
 
 -- When no lsp is attached
-vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, {buffer=0})
-vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, {buffer=0})
-vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, {buffer=0})
+vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 
 -- Setup other completion after lsp-zero
 cmp.setup {
