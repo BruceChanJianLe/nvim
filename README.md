@@ -1,6 +1,6 @@
 # NeoVim
 
-This is a nvim repository that aims to be as easy to use as vscode.
+A nvim config that aims to be as easy to use as vscode.
 
 ## Plugin Manager
 
