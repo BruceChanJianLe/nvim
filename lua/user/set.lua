@@ -56,3 +56,5 @@ end
 -- use mouse in all case
 vim.opt.mouse = "a"
 
+-- highlight cursor line
+vim.opt.cursorline = true
