@@ -15,6 +15,7 @@ For telescope to work please install `ripgrep` and `fd`. May need to alias fdfin
 - [lua_nvim](https://www.youtube.com/watch?v=IP3J56sKtn0)
 - [new_learning_video](https://www.youtube.com/watch?v=434tljD-5C8) [https://github.com/jessarcher/dotfiles]
 - [vscode-ish setup](https://www.youtube.com/watch?v=GcoHnB5DoFA)
+- [highlight group](https://www.youtube.com/watch?v=iHYeCLOOO_k&ab_channel=YukiUthman)
 
 Github
 - [current_ref_nvim_config](https://github.com/ChristianChiarulli/nvim/)
