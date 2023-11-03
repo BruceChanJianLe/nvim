@@ -121,4 +121,7 @@ return require('packer').startup(function(use)
   -- Highlights other instances of word under your cursor
   use ("RRethy/vim-illuminate")
 
+  -- Prime worktrees!
+  use { 'theprimeagen/git-worktree.nvim', }
+
 end)
