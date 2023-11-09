@@ -7,7 +7,7 @@ A nvim config that aims to be as easy to use as vscode.
 For neovim version 0.5 and above (gotta install from source) use [Packer](https://github.com/wbthomason/packer.nvim) to manage your plugins.
 
 ## Other Deps
-For telescope to work please install `ripgrep` and `fd`. May need to alias fdfind -> fd on Ubuntu.
+For telescope to work please install [`ripgrep`](https://github.com/BurntSushi/ripgrep/releases) and [`fd`](https://github.com/sharkdp/fd/releases). May need to alias fdfind -> fd on Ubuntu.
 
 ## Reference
 - [learning_video1](https://www.youtube.com/watch?v=gnupOrSEikQ)
