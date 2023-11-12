@@ -124,4 +124,7 @@ return require('packer').startup(function(use)
   -- Prime worktrees!
   use { 'theprimeagen/git-worktree.nvim', }
 
+  -- Notification
+  use { 'rcarriga/nvim-notify', }
+
 end)
