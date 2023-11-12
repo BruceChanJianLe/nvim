@@ -89,6 +89,8 @@ vim.keymap.set("n", "<leader>e", ":e!<CR>")
 -- quit / quit! (all)
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<leader>Q", ":qa!<CR>")
+vim.keymap.set("v", "<leader>q", ":<BS><BS><BS><BS><BS>q<CR>")
+vim.keymap.set("v", "<leader>Q", ":<BS><BS><BS><BS><BS>qa!<CR>")
 
 -- save and quit (all)
 vim.keymap.set("n", "<leader>x", ":x<CR>")
