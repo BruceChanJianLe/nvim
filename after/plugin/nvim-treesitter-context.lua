@@ -4,4 +4,4 @@ if not status_ok then
 end
 
 vim.api.nvim_set_hl(0, "TreesitterContext", { link = "MatchParen"})
-vim.keymap.set({"n", "i", "v"}, "<leader>tc", "<cmd> TSContextToggle<CR>", { desc = "[T]oggle Treesitter [C]ontext"})
+vim.keymap.set({"n", "v"}, "<leader>tc", "<cmd> TSContextToggle<CR>", { desc = "[T]oggle Treesitter [C]ontext"})
