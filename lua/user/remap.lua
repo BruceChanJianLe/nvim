@@ -122,7 +122,8 @@ function ToggleTextWrap()
   end
 end
 
-vim.keymap.set("n", "<A-z>", ":lua ToggleTextWrap()<CR>")
+vim.keymap.set({"n", "v"}, "<A-z>", ":lua ToggleTextWrap()<CR>")
+vim.keymap.set("i", "<A-z>", "<Esc>:lua ToggleTextWrap()<CR>a")
 
 -- toggle paste format
 function TogglePasteFormat()
