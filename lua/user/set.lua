@@ -14,8 +14,8 @@ vim.opt.expandtab = true
 -- use vim indent
 vim.opt.smartindent = true
 
--- no wrap for long lines
-vim.opt.wrap = false
+-- wrap for long lines
+vim.opt.wrap = true
 
 -- let undotree handle history
 vim.opt.swapfile = false

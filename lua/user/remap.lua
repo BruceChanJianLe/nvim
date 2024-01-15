@@ -111,7 +111,7 @@ end
 
 vim.keymap.set("n", "<leader>n", ":lua ToggleLineNumber()<CR>")
 
--- toggele line wrap
+-- toggle line wrap
 function ToggleTextWrap()
   if (vim.o.wrap) then
     vim.o.wrap = false
