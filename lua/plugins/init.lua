@@ -22,8 +22,14 @@ return {
   {'tpope/vim-surround'},
   {'wellle/targets.vim'},
 
+  -- color setup
+  'RRethy/nvim-base16',
+  { "lukas-reineke/indent-blankline.nvim" },
+  { "Mofiqul/vscode.nvim" },
+
    {
     'VonHeikemen/lsp-zero.nvim',
+    branch = 'main',
     dependencies = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' },
