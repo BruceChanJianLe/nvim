@@ -124,10 +124,10 @@ cmp.setup {
   -- Order of sources matter, top has higher priority
   -- Configure: keyword_length, priority, max_item_count
   sources = {
-    { name = 'nvim_lsp' , keyword_length = 17},
-    { name = 'luasnip' , keyword_length = 17},
-    { name = 'buffer', keyword_length = 17 },
-    { name = 'path' , keyword_length = 17},
+    { name = 'nvim_lsp' , keyword_length = 4},
+    { name = 'luasnip' , keyword_length = 4},
+    { name = 'buffer', keyword_length = 4 },
+    { name = 'path' , keyword_length = 4},
   },
 
   experimental = {
