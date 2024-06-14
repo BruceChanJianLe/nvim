@@ -127,4 +127,7 @@ return require('packer').startup(function(use)
   -- Notification
   use { 'rcarriga/nvim-notify', }
 
+  -- Quick files management
+  use { 'stevearc/oil.nvim', }
+
 end)
