@@ -24,6 +24,9 @@ vim.keymap.set("n", "J", "mzJ`z")
 -- Keep cursor center for page up and down
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- Keep cursor center for brace jump
+vim.keymap.set("n", "{", "{zz")
+vim.keymap.set("n", "}", "}zz")
 -- Keep cursor center after jumping to bottom
 vim.keymap.set("n", "G", "Gzz")
 -- keep cursor in middle while searching
