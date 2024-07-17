@@ -12,7 +12,13 @@ return require('packer').startup(function(use)
     -- or                            , branch = '0.1.x',
     requires = { 'nvim-lua/plenary.nvim',
       -- Fuzzy search in current file
-      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make',
+        requires = {
+          'junegunn/fzf',
+          run = function() vim.fn['fzf#install']() end}
+        },
       -- Use riggrep with flags
       "nvim-telescope/telescope-rg.nvim",
       -- Show available snippets
