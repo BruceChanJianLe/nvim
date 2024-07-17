@@ -17,6 +17,7 @@ return require('packer').startup(function(use)
         run = 'make',
         requires = {
           'junegunn/fzf',
+          commit = '7191ebb615f5d6ebb', -- fzf version 0.20.0
           run = function() vim.fn['fzf#install']() end}
         },
       -- Use riggrep with flags
