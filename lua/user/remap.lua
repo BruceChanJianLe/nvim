@@ -24,6 +24,9 @@ vim.keymap.set("n", "J", "mzJ`z")
 -- Keep cursor center for page up and down
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- Keep cursor center for brace jump
+vim.keymap.set("n", "{", "{zz")
+vim.keymap.set("n", "}", "}zz")
 -- Keep cursor center after jumping to bottom
 vim.keymap.set("n", "G", "Gzz")
 -- keep cursor in middle while searching
@@ -143,6 +146,10 @@ vim.keymap.set("n", "<leader>h", ":wincmd h<CR>")
 vim.keymap.set("n", "<leader>j", ":wincmd j<CR>")
 vim.keymap.set("n", "<leader>k", ":wincmd k<CR>")
 vim.keymap.set("n", "<leader>l", ":wincmd l<CR>")
+vim.keymap.set("v", "<leader>h", ":<BS><BS><BS><BS><BS>wincmd h<CR>")
+vim.keymap.set("v", "<leader>j", ":<BS><BS><BS><BS><BS>wincmd j<CR>")
+vim.keymap.set("v", "<leader>k", ":<BS><BS><BS><BS><BS>wincmd k<CR>")
+vim.keymap.set("v", "<leader>l", ":<BS><BS><BS><BS><BS>wincmd l<CR>")
 
 -- stay in visual mode while indenting
 vim.keymap.set("v", ">", ">gv")
