@@ -2,7 +2,19 @@
 return {
   {
     "windwp/nvim-autopairs",
-    opts = {
+    opts = {},
+    config = function()
+      local status_ok, npairs = pcall(require, "nvim-autopairs")
+      if not status_ok then
+        return
+      end
+
+      -- local status_ok2, Rule = pcall(require, 'nvim-autopairs.rule')
+      -- if not status_ok2 then
+      --   return
+      -- end
+
+      npairs.setup {
         check_ts = true,
         ts_config = {
           lua = { "string", "source" },
@@ -10,7 +22,7 @@ return {
           java = false,
         },
         disable_filetype = { "TelescopePrompt", "spectre_panel" },
-        disable_in_macro = false, -- disable when recording or executing a macro
+        disable_in_macro = false,       -- disable when recording or executing a macro
         disable_in_visualblock = false, -- disable when insert after visual block mode
         disable_in_replace_mode = true,
         -- Don't use fast wrap
@@ -25,15 +37,16 @@ return {
         --   highlight = "PmenuSel",
         --   highlight_grey = "LineNr",
         -- },
-      },
-    config = function()
+      }
 
+      -- Add angle bracket rule
+      -- npairs.add_rule(Rule("<", ">"))
       local cmp_autopairs = require "nvim-autopairs.completion.cmp"
       local cmp_status_ok, cmp = pcall(require, "cmp")
       if not cmp_status_ok then
         return
       end
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { text = "" } })
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
     end
   }
 }

@@ -4,7 +4,7 @@ return {
     build = ':TSUpdate',
     opts = {
       -- A list of parser names, or "all"
-      ensure_installed = { "cpp", "lua", "rust" },
+      ensure_installed = { 'cpp', 'lua', 'rust', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
 
       -- Autoinstall languages that are not installed
       auto_install = true,
