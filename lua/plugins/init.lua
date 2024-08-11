@@ -16,9 +16,7 @@ return {
   -- Use by tmux resurrect
   {
     'tpope/vim-obsession',
-    dependencies = {
-      'tpope/vim-repeat'
-    }
+    dependencies = { 'tpope/vim-repeat' }
   },
 
 }

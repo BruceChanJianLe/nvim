@@ -2,6 +2,7 @@
 return {
   {
     'abecodes/tabout.nvim',
+    opts = {},
     config = function()
       require('tabout').setup {
         tabkey = '<Tab>',           -- key to trigger tabout, set to an empty string to disable

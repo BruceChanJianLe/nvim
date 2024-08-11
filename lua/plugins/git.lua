@@ -2,6 +2,7 @@
 return {
   {
     'tpope/vim-fugitive',
+    opts = {},
     config = function()
       vim.keymap.set("n", "<leader>gs", vim.cmd.Git);
       vim.keymap.set("n", "<leader>gp", "<cmd>Git push<CR>");
@@ -13,8 +14,7 @@ return {
 
   {
     'lewis6991/gitsigns.nvim',
-    opts = {
-    },
+    opts = {},
     config = function()
       local status_ok, gitsigns = pcall(require, "gitsigns")
       if not status_ok then
