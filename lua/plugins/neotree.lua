@@ -2,7 +2,7 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
-    opts = {},
+    -- opts = {},
     config = function()
       local status_ok, neotree = pcall(require, "neo-tree")
       if not status_ok then

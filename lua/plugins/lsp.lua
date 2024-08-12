@@ -415,15 +415,12 @@ return {
           return 'make install_jsregexp'
         end)(),
         dependencies = {
-          -- `friendly-snippets` contains a variety of premade snippets.
-          --    See the README about individual language/framework/plugin snippets:
-          --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'brucechanjianle/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
       },
       'saadparwaiz1/cmp_luasnip',
@@ -433,13 +430,11 @@ return {
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
 
-      { 'hrsh7th/cmp-buffer' },       -- Using words buffers
-      { 'hrsh7th/cmp-path' },         -- Using file{name}s
-      { 'hrsh7th/cmp-nvim-lua' },     -- For when writing lua in nvim
-      { 'saadparwaiz1/cmp_luasnip' }, -- For lua snippets
-
-      -- Snippet Collection {Optional}
-      { "brucechanjianle/friendly-snippets" }
+      { 'hrsh7th/cmp-buffer' },                    -- Using words buffers
+      { 'hrsh7th/cmp-path' },                      -- Using file{name}s
+      { 'hrsh7th/cmp-nvim-lua' },                  -- For when writing lua in nvim
+      { 'hrsh7th/cmp-nvim-lsp-signature-help' },   -- For function signature
+      { 'saadparwaiz1/cmp_luasnip' },              -- For lua snippets
     },
     config = function()
       -- See `:help cmp`
@@ -466,8 +461,8 @@ return {
           ['<C-p>'] = cmp.mapping.select_prev_item(),
 
           -- Scroll the documentation window [b]ack / [f]orward
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-d>'] = cmp.mapping.scroll_docs(4),
 
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
@@ -511,6 +506,7 @@ return {
           { name = 'luasnip',  keyword_length = 4 },
           { name = 'buffer',   keyword_length = 4 },
           { name = 'path',     keyword_length = 4 },
+          { name = 'nvim_lsp_signature_help' },
         },
 
         experimental = {
