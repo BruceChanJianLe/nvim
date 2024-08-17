@@ -184,8 +184,10 @@ function ToggleZoom()
 end
 vim.keymap.set("n", "<leader>z", ":lua ToggleZoom()<CR>")
 
-vim.keymap.set("i", "<C-l>", "<Right>")
-vim.keymap.set("i", "<C-h>", "<Left>")
+-- Cursor movement for insert mode
+-- left and right remap is done in lsp.lua due to clash with cmp
+vim.keymap.set("i", "<C-j>", "<Down>")
+vim.keymap.set("i", "<C-k>", "<Up>")
 vim.keymap.set("i", "<A-l>", "<C-Right>")
 vim.keymap.set("i", "<A-h>", "<C-Left>")
 -- Backspace entire word

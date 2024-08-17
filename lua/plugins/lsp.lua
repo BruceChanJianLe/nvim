@@ -339,6 +339,7 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         clangd = {},
+        cmake = {},
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -429,11 +430,11 @@ return {
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
 
-      { 'hrsh7th/cmp-buffer' },                    -- Using words buffers
-      { 'hrsh7th/cmp-path' },                      -- Using file{name}s
-      { 'hrsh7th/cmp-nvim-lua' },                  -- For when writing lua in nvim
-      { 'hrsh7th/cmp-nvim-lsp-signature-help' },   -- For function signature
-      { 'saadparwaiz1/cmp_luasnip' },              -- For lua snippets
+      { 'hrsh7th/cmp-buffer' },                  -- Using words buffers
+      { 'hrsh7th/cmp-path' },                    -- Using file{name}s
+      { 'hrsh7th/cmp-nvim-lua' },                -- For when writing lua in nvim
+      { 'hrsh7th/cmp-nvim-lsp-signature-help' }, -- For function signature
+      { 'saadparwaiz1/cmp_luasnip' },            -- For lua snippets
     },
     config = function()
       -- See `:help cmp`
@@ -484,11 +485,27 @@ return {
           ['<C-l>'] = cmp.mapping(function()
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
+            else
+              -- Move the cursor one character to the right
+              local cursor_pos = vim.api.nvim_win_get_cursor(0)
+              local row = cursor_pos[1]
+              local col = cursor_pos[2]
+              local line_length = vim.api.nvim_strwidth(vim.api.nvim_get_current_line())
+
+              if col < line_length then
+                vim.api.nvim_win_set_cursor(0, { row, col + 1 })
+              end
             end
           end, { 'i', 's' }),
           ['<C-h>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
+            else
+              -- Move the cursor one character to the left
+              local col = vim.api.nvim_win_get_cursor(0)[2]
+              if col > 0 then
+                vim.api.nvim_win_set_cursor(0, { vim.api.nvim_win_get_cursor(0)[1], col - 1 })
+              end
             end
           end, { 'i', 's' }),
 
@@ -501,10 +518,10 @@ return {
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
             group_index = 0,
           },
-          { name = 'nvim_lsp', keyword_length = 4 },
-          { name = 'luasnip',  keyword_length = 4 },
-          { name = 'buffer',   keyword_length = 4 },
-          { name = 'path',     keyword_length = 4 },
+          { name = 'nvim_lsp',               keyword_length = 4 },
+          { name = 'luasnip',                keyword_length = 4 },
+          { name = 'buffer',                 keyword_length = 4 },
+          { name = 'path',                   keyword_length = 4 },
           { name = 'nvim_lsp_signature_help' },
         },
 
