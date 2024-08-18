@@ -69,10 +69,11 @@ return {
               renamed   = "", -- this can only be used in the git_status source
               -- Status type
               untracked = "U",
-              ignored   = "",
+              ignored   = "◌",
               unstaged  = "M",
               staged    = "",
               conflict  = "",
+              unmerged = "",
             }
           },
         },
