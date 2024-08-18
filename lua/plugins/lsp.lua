@@ -28,14 +28,6 @@ return {
 
       -- Allows extra capabilities provided by nvim-cmp
       'hrsh7th/cmp-nvim-lsp',
-
-      -- Autocompletion
-      -- { 'hrsh7th/nvim-cmp' },
-      -- { 'hrsh7th/cmp-buffer' },       -- Using words buffers
-      -- { 'hrsh7th/cmp-path' },         -- Using file{name}s
-      -- { 'hrsh7th/cmp-nvim-lua' },     -- For when writing lua in nvim
-      -- { 'hrsh7th/cmp-nvim-lsp' },     -- LSP support and moving snippets
-      -- { 'saadparwaiz1/cmp_luasnip' }, -- For lua snippets
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -200,10 +192,24 @@ return {
           end,
         },
       }
+
+      -- Customize LSP diagnostics with icons
+      local signs = {
+        Error = ' ',
+        Warn = ' ',
+        Hint = '',
+        Info = ''
+      }
+
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
     end,
   },
 
-  { -- Autocompletion
+  -- Autocompletion
+  {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
