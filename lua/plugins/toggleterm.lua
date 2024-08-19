@@ -23,7 +23,7 @@ return {
             return vim.o.columns * 0.4
           end
         end,
-        open_mapping = [[<C-^>]],
+        open_mapping = [[<leader><leader>t]],
         shading_factor = 2,
         hide_numbers = true,
         shade_filetypes = {},
