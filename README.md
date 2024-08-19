@@ -10,6 +10,7 @@ For neovim version 0.10 and above (gotta install from source) use [Lazy](https:/
 For telescope to work please install [`ripgrep`](https://github.com/BurntSushi/ripgrep/releases) and [`fd`](https://github.com/sharkdp/fd/releases). May need to alias fdfind -> fd on Ubuntu.
 
 ## TODOs
+- re-org the keybindings, T - toggle group, e.g. toggle term, toggle renu, toggle tressitter context, etc.
 - swtich header and source (c++)
 - quick jump to next and previous if else statements
 - open buffer to selected window from neotree
