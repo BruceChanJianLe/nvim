@@ -156,8 +156,8 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "<", "<gv")
 
 -- increment and decrement from beginning of line
-vim.keymap.set("n", "<A-a>", "?\\d<CR>")
-vim.keymap.set("n", "<A-x>", "?\\d")
+-- vim.keymap.set("n", "<A-a>", "?\\d<CR>")
+-- vim.keymap.set("n", "<A-x>", "?\\d")
 
 -- append lines in insert mode
 vim.keymap.set("n", "<leader>o", "mpo<esc>`p")
