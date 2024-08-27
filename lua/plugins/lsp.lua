@@ -293,29 +293,36 @@ return {
           --
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
+          ['<C-j>'] = cmp.mapping(function()
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             else
-              -- Move the cursor one character to the right
-              local cursor_pos = vim.api.nvim_win_get_cursor(0)
-              local row = cursor_pos[1]
-              local col = cursor_pos[2]
-              local line_length = vim.api.nvim_strwidth(vim.api.nvim_get_current_line())
+              -- Move the cursor one character to the down
+              local cursor = vim.api.nvim_win_get_cursor(0)
+              -- cursor[1] is the line number (1-based), cursor[2] is the column number (1-based)
 
-              if col < line_length then
-                vim.api.nvim_win_set_cursor(0, { row, col + 1 })
+              -- Get the total number of lines in the buffer
+              local total_lines = vim.api.nvim_buf_line_count(0)
+
+              -- Check if the cursor is already at the bottom line
+              if cursor[1] < total_lines then
+                -- Move the cursor down by one line
+                vim.api.nvim_win_set_cursor(0, { cursor[1] + 1, cursor[2] })
               end
             end
           end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
+          ['<C-k>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             else
-              -- Move the cursor one character to the left
-              local col = vim.api.nvim_win_get_cursor(0)[2]
-              if col > 0 then
-                vim.api.nvim_win_set_cursor(0, { vim.api.nvim_win_get_cursor(0)[1], col - 1 })
+              -- Move the cursor one character to the up
+              local cursor = vim.api.nvim_win_get_cursor(0)
+              -- cursor[1] is the line number (1-based), cursor[2] is the column number (1-based)
+
+              -- Check if the cursor is already at the top line
+              if cursor[1] > 1 then
+                -- Move the cursor up by one line
+                vim.api.nvim_win_set_cursor(0, { cursor[1] - 1, cursor[2] })
               end
             end
           end, { 'i', 's' }),

@@ -185,9 +185,31 @@ end
 vim.keymap.set("n", "<leader>z", ":lua ToggleZoom()<CR>")
 
 -- Cursor movement for insert mode
--- left and right remap is done in lsp.lua due to clash with cmp
-vim.keymap.set("i", "<C-j>", "<Down>")
-vim.keymap.set("i", "<C-k>", "<Up>")
+-- up and down remap is done in luasnip due to key clash
+
+-- Move Right
+function MoveCursorRight()
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  local row = cursor_pos[1]
+  local col = cursor_pos[2]
+  local line_length = vim.api.nvim_strwidth(vim.api.nvim_get_current_line())
+  if col < line_length then
+    vim.apt.nvim_win_set_cursor(0, { row, col + 1 })
+  end
+end
+
+-- Move Left
+function MoveCursorRight()
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)[2]
+  local row = cursor_pos[1]
+  local col = cursor_pos[2]
+  if col > 0 then
+    vim.apt.nvim_win_set_cursor(0, { row, col - 1 })
+  end
+end
+
+vim.keymap.set("i", "<C-h>", "<Left>")
+vim.keymap.set("i", "<C-l>", "<Right>")
 vim.keymap.set("i", "<A-l>", "<C-Right>")
 vim.keymap.set("i", "<A-h>", "<C-Left>")
 -- Backspace entire word
