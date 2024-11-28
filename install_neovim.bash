@@ -107,7 +107,7 @@ then
   i=0
 
     # Make branches name into an array
-    branches=$(git for-each-ref refs  --format='%(refname)' | grep origin | cut -d/ -f4)
+    branches=$(git for-each-ref refs  --format='%(refname)' | grep origin | cut -d/ -f4 | sort -V)
     for branch in $branches
     do
       arr[$i]=$branch
