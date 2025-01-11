@@ -44,6 +44,9 @@ return {
         },
       }
 
+      -- open terminal mode in visual mode
+      vim.keymap.set('v', '<M-C-Space>', "<cmd>ToggleTerm<CR>")
+
       function _G.set_terminal_keymaps()
         local opts = { buffer = 0 }
         vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts) -- escape from terminal mode
