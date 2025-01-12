@@ -53,7 +53,7 @@ return {
       -- prime
       vim.keymap.set('n', '<leader>pg', builtin.git_files, { desc = '[P]roject [G]it files' })
       -- others
-      vim.keymap.set('n', "<leader>sl", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>",  { desc = '[S]earch [L]ive'})
+      vim.keymap.set('n', "<leader>sl", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>",  { desc = '[S]earch [L]ive Grep'})
 
       -- To discuss and remove
       -- vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
