@@ -79,7 +79,7 @@ vim.keymap.set("n", "<leader>@", [[:cdo norm @]], { desc = 'Cdo replace with [@]
 vim.keymap.set("n", "<leader><leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- set filetype
-vim.keymap.set("n", "<leader>s", ":se ft=")
+vim.keymap.set("n", "<leader>st", ":se ft=", { desc = '[S]et file[T]ype'})
 
 -- save all files
 vim.keymap.set("n", "<leader>w", ":wa<CR>")
