@@ -112,7 +112,7 @@ function ToggleLineNumber()
   end
 end
 
-vim.keymap.set("n", "<leader>n", ":lua ToggleLineNumber()<CR>")
+vim.keymap.set("n", "<leader>tn", ":lua ToggleLineNumber()<CR>", { desc = '[T]oggle Line [N]umber'})
 
 -- toggle line wrap
 function ToggleTextWrap()
