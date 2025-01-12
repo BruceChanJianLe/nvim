@@ -93,7 +93,7 @@ return {
         require('telescope.builtin').current_buffer_fuzzy_find(opt)
       end
 
-      vim.keymap.set('n', '<leader>fs', "<cmd>lua earchFile()<CR>", { desc = '[/] Fuzzily search in current buffer' })
+      vim.keymap.set('n', '<leader>fs', "<cmd>lua SearchFile()<CR>", { desc = '[/] Fuzzily search in current buffer' })
       vim.keymap.set('n', '<C-f>', "<cmd>lua SearchFile()<CR>", { desc = '[/] Fuzzily search in current buffer' })
     end
   },
