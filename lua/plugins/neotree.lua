@@ -2,7 +2,9 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
-    -- opts = {},
+    lazy=false,
+    priority=10000,
+    opts = {},
     config = function()
       local status_ok, neotree = pcall(require, "neo-tree")
       if not status_ok then
@@ -138,7 +140,7 @@ return {
             ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
             ["q"] = "close_window",
             ["R"] = "refresh",
-            ["?"] = "show_help",
+            ["g?"] = "show_help",
             ["<"] = "prev_source",
             [">"] = "next_source",
           }
@@ -176,7 +178,7 @@ return {
           -- "open_current",  -- netrw disabled, opening a directory opens within the
           -- window like netrw would, regardless of window.position
           -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-          use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
+          use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
           -- instead of relying on nvim autocmd events.
           window = {
             mappings = {

@@ -76,15 +76,16 @@ vim.keymap.set("n", "<leader>@", [[:cdo norm @]], { desc = 'Cdo replace with [@]
 -- getting text for visually selected text (https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript)
 
 -- make current file executable
-vim.keymap.set("n", "<leader><leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>sx", "<cmd>!chmod +x %<CR>", { silent = true, desc = '[S]et e[X]ecutable bit' })
+vim.keymap.set("n", "<leader>sX", "<cmd>!chmod +x %<CR>", { silent = true, desc = 'un[S]et e[X]ecutable bit' })
 
 -- set filetype
 vim.keymap.set("n", "<leader>st", ":se ft=", { desc = '[S]et file[T]ype'})
 
 -- save all files
-vim.keymap.set("n", "<leader>w", ":wa<CR>")
+vim.keymap.set("n", "<leader>w", ":wa<CR>", { desc = '[W]rite and save all files'})
 vim.keymap.set("v", "<leader>w", ":<BS><BS><BS><BS><BS>wa<CR>gv", { desc = 'Sudo save, hence, the exclamation!' })
-vim.keymap.set("n", "<leader>W", ":w !sudo tee %")
+vim.keymap.set("n", "<leader>w!", ":w !sudo tee %", { desc = '[W]rite and save file with Sudo'})
 
 -- revert edit
 vim.keymap.set("n", "<leader>e", ":e!<CR>")

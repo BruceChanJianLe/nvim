@@ -41,7 +41,7 @@ return {
 
       local builtin = require('telescope.builtin')
 
-      -- TJ
+      -- Search Key-binds
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
@@ -50,24 +50,24 @@ return {
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>sg', builtin.git_files, { desc = '[S]earch [G]it files' })
-      -- prime
-      vim.keymap.set('n', '<leader>pg', builtin.git_files, { desc = '[P]roject [G]it files' })
-      -- others
+      vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', "<leader>sl", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>",  { desc = '[S]earch [L]ive Grep'})
+      vim.keymap.set('n', '<leader>sp', function() builtin.grep_string({ search = vim.fn.input("Grep > ") }) end,
+        { desc = '[S]earch [P]roject files for string' })
+      -- prime
 
       -- To discuss and remove
       -- vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = '[S]earch by [G]rep' })
 
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      -- vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-      vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = '[S]earch [F]iles' })
-
-      -- vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+      vim.keymap.set('n', '<leader>pg', builtin.git_files, { desc = '[P]roject [G]it files' })
+      vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = '[P]roject [F]iles' })
       vim.keymap.set('n', '<leader>ps', function()
         builtin.grep_string({ search = vim.fn.input("Grep > ") })
       end,
       { desc = '[P]roject [S]earch for string'})
+
       -- Search WORD under cursor
       vim.keymap.set('n', '<leader>pWs', function()
         local word = vim.fn.expand('<cWORD>')
@@ -80,11 +80,6 @@ return {
         builtin.grep_string({ search = word })
       end,
       { desc = '[P]roject small [W]ord [S]earch'})
-
-      -- vim.keymap.set('n', '<C-p>', function()
-      --   local opt = { layout_config = { horizontal = { prompt_position = "top" } } }
-      --   builtin.find_files(opt)
-      -- end, {})
 
       -- fuzzy find in current file
       function SearchFile()
