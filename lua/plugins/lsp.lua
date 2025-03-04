@@ -114,6 +114,11 @@ return {
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
           end
+
+          -- For C++ filetype to toggle between header and source with lsp
+          if vim.bo.filetype == "cpp" then
+            vim.keymap.set("n", "<leader>ts", ":ClangdSwitchSourceHeader<CR>", { desc = '[T]oggle [S]witch Source/Header (only cpp files)'})
+          end
         end,
       })
 
