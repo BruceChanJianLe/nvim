@@ -38,7 +38,7 @@ return {
         max_width = nil,
         max_height = nil,
         max_width_window_percentage = nil,
-        max_height_window_percentage = 50,
+        max_height_window_percentage = 80,
         kitty_method = 'normal',
       }
     end,
