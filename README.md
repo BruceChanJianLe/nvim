@@ -9,6 +9,10 @@ For neovim version 0.10 and above (gotta install from source) use [Lazy](https:/
 ## Other Deps
 For telescope to work please install [`ripgrep`](https://github.com/BurntSushi/ripgrep/releases) and [`fd`](https://github.com/sharkdp/fd/releases). May need to alias fdfind -> fd on Ubuntu.
 
+```bash
+sudo apt install python-venv imagemagick luarocks
+```
+
 ## TODOs
 - Fix telescope fzf native (from time to time this will happen) cd `$HOME/.local/share/nvim/lazy/telescope-fzf-native.nvim` and cmake it!
   Missing libfzf.so but strictly speaking lazy should be able to handle it.
