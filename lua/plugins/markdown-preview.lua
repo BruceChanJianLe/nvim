@@ -12,7 +12,6 @@ return {
     vim.cmd(
       [[
     function OpenMarkdownPreview (url)
-      " execute "silent ! brave-browser --incognito --app=" . a:url
       execute "silent ! google-chrome --incognito --app=" . a:url
       endfunction
     ]]
