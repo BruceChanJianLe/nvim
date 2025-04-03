@@ -82,7 +82,7 @@ if [[ $DEPS == "true" ]]
 then
   echo "Installing depedencies for building neovim..."
   sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen ripgrep -y -qq
-  sudo apt-get install python3-venv luarocks imagemagick -y -qq
+  sudo apt-get install python3-venv luarocks imagemagick clangd -y -qq
 fi
 
 # Checks if neovim directory already exists
