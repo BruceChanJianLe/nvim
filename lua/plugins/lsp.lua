@@ -117,7 +117,8 @@ return {
 
           -- For C++ filetype to toggle between header and source with lsp
           if vim.bo.filetype == "cpp" then
-            vim.keymap.set("n", "<leader>ts", ":ClangdSwitchSourceHeader<CR>", { desc = '[T]oggle [S]witch Source/Header (only cpp files)'})
+            vim.keymap.set("n", "<leader>ts", ":ClangdSwitchSourceHeader<CR>",
+              { desc = '[T]oggle [S]witch Source/Header (only cpp files)' })
           end
         end,
       })
@@ -142,7 +143,6 @@ return {
         clangd = {},
         cmake = {},
         -- gopls = {},
-        -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
@@ -163,6 +163,22 @@ return {
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+        pylsp = {
+          settings = {
+            pylsp = {
+              plugins = {
+                pyflakes = { enabled = false },
+                pycodestyle = { enabled = false },
+                autopep8 = { enabled = false },
+                yapf = { enabled = false },
+                mccabe = { enabled = false },
+                pylsp_mypy = { enabled = false },
+                pylsp_black = { enabled = false },
+                pylsp_isort = { enabled = false },
+              },
             },
           },
         },
