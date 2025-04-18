@@ -1,28 +1,21 @@
-# NeoVim
+A nvim config that aims to be as easy to use as vscode.  
+> Oh well! Maybe there will still be a learning curve.  
 
-A nvim config that aims to be as easy to use as vscode.
 
-## Plugin Manager
+## LSP Support
 
-For neovim version 0.10 and above (gotta install from source) use [Lazy](https://github.com/folke/lazy.nvim?tab=readme-ov-file) to manage plugins.
+LSP | Remarks
+--- | ---
+c++ | Supported across U20, U22, U24 and Arch
+python | Supported for U24 and Arch
 
-## Other Deps
-For telescope to work please install [`ripgrep`](https://github.com/BurntSushi/ripgrep/releases) and [`fd`](https://github.com/sharkdp/fd/releases). May need to alias fdfind -> fd on Ubuntu.
+## Dependencies
 
 ```bash
-sudo apt install python-venv imagemagick luarocks
+sudo apt-get install python3-venv luarocks imagemagick clangd python3-pylsp
 ```
 
-## TODOs
-- Fix telescope fzf native (from time to time this will happen) cd `$HOME/.local/share/nvim/lazy/telescope-fzf-native.nvim` and cmake it!
-  Missing libfzf.so but strictly speaking lazy should be able to handle it.
-- re-org the keybindings, T - toggle group, e.g. toggle term, toggle renu, toggle tressitter context, etc.
-- swtich header and source (c++)
-- quick jump to next and previous if else statements
-- open buffer to selected window from neotree
-- show function signature (c++)
-- do not add header by default, must trigger lsp action
-- center cursor when `gd` going to definition
+For telescope to work please install [`ripgrep`](https://github.com/BurntSushi/ripgrep/releases) and [`fd`](https://github.com/sharkdp/fd/releases). May need to alias fdfind -> fd on Ubuntu.
 
 ## Reference
 - [learning_video1](https://www.youtube.com/watch?v=gnupOrSEikQ)
