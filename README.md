@@ -17,6 +17,14 @@ sudo apt-get install python3-venv luarocks imagemagick clangd python3-pylsp
 
 For telescope to work please install [`ripgrep`](https://github.com/BurntSushi/ripgrep/releases) and [`fd`](https://github.com/sharkdp/fd/releases). May need to alias fdfind -> fd on Ubuntu.
 
+## Notes
+
+Incrementing all occurrences of a line, for example, 'apple 1' in a file. TL;DR.
+```bash
+# Firstly, yank 0 into your registery
+:g/apple/norm! f1vp^Ayiw
+```
+
 ## Reference
 - [learning_video1](https://www.youtube.com/watch?v=gnupOrSEikQ)
 - [learning_video2](https://www.youtube.com/watch?v=65Wq4fjREUU)
