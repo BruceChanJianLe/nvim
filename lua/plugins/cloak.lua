@@ -13,6 +13,8 @@ return {
           file_pattern = {
             'id_cjl',
             'id_bri',
+            'id_eli',
+            'id_elip',
             'brave',
           },
           -- Match an equals sign and any character after it.
