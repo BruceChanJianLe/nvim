@@ -25,6 +25,16 @@ Incrementing all occurrences of a line, for example, 'apple 1' in a file. TL;DR.
 :g/apple/norm! f1vp^Ayiw
 ```
 
+## Error
+
+Recently, there is an error when using lsp for cmake, the fix is as below:  
+```bash
+cd ~/.local/share/nvim/mason/packages/cmake-language-server
+source venv/bin/activate
+pip install "pygls<2.0" --upgrade
+deactivate
+```
+
 ## Reference
 - [learning_video1](https://www.youtube.com/watch?v=gnupOrSEikQ)
 - [learning_video2](https://www.youtube.com/watch?v=65Wq4fjREUU)
