@@ -57,10 +57,9 @@ return {
       },
     },
     config = function(_, opts)
-      require('nvim-treesitter.configs').setup(opts)
+      require('nvim-treesitter.config').setup(opts)
     end
   },
-  { 'nvim-treesitter/playground' },
   -- Show func signature when scrolling
   {
     'nvim-treesitter/nvim-treesitter-context',
