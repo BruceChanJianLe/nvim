@@ -139,9 +139,9 @@ return {
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
+      -- Servers managed by Mason (auto-installed)
       local servers = {
-        clangd = {},
-        cmake = {},
         -- gopls = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -166,6 +166,12 @@ return {
             },
           },
         },
+      }
+
+      -- Servers installed system-wide (apt, etc.) - Mason will NOT touch these
+      local system_servers = {
+        clangd = {},
+        cmake = {},
         pylsp = {
           settings = {
             pylsp = {
@@ -196,6 +202,7 @@ return {
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      -- servers for mason to handle
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
@@ -204,10 +211,18 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            vim.lsp.config(server_name, server)
+            vim.lsp.enable(server_name)
           end,
         },
       }
+
+      -- system wide server setup
+      for server_name, server in pairs(system_servers) do
+        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+        vim.lsp.config(server_name, server)
+        vim.lsp.enable(server_name)
+      end
 
       -- Customize LSP diagnostics with icons
       local signs = {
