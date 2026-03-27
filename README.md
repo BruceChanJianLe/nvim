@@ -12,7 +12,9 @@ python | Supported for U24 and Arch
 ## Dependencies
 
 ```bash
-sudo apt-get install python3-venv luarocks imagemagick clangd python3-pylsp
+sudo apt-get install python3-venv luarocks imagemagick clangd
+# Python lsp
+sudo apt install python3-pyflakes python3-pycodestyle python3-autopep8 python3-yapf python3-mccabe python3-pylsp-mypy python3-pylsp-black python3-pylsp-isort python3-pylsp
 ```
 
 For telescope to work please install [`ripgrep`](https://github.com/BurntSushi/ripgrep/releases) and [`fd`](https://github.com/sharkdp/fd/releases). May need to alias fdfind -> fd on Ubuntu.
