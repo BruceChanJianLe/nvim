@@ -1,44 +1,57 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-
-    tag = '0.1.5',
-
-    dependencies = { 'nvim-lua/plenary.nvim',
+    enabled = true,
+    event = 'VimEnter',
+    dependencies = {
+      { 'nvim-lua/plenary.nvim' },
       -- Fuzzy search in current file
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
-        -- dependencies = {
-        --   'junegunn/fzf',
-        --   commit = '7191ebb615f5d6ebb', -- fzf version 0.20.0
-        --   config = function() vim.fn['fzf#install']() end}
+        cond = function () return vim.fn.executable 'make' == 1 end,
       },
       -- Use riggrep with flags
-      "nvim-telescope/telescope-rg.nvim",
+      { 'nvim-telescope/telescope-rg.nvim' },
+      -- This is new
+      { 'nvim-telescope/telescope-ui-select.nvim' },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
       -- Show available snippets
-      { "benfowler/telescope-luasnip.nvim" } --, module = "telescope._extensions.luasnip", --[[ lazy-load ]] },
+     { 'benfowler/telescope-luasnip.nvim' },
     },
 
     config = function()
+      -- vim.treesitter.ft_to_lang was removed in Neovim 0.11; telescope still calls it
+      if not vim.treesitter.ft_to_lang then
+        vim.treesitter.ft_to_lang = function(ft)
+          local ok, lang = pcall(vim.treesitter.language.get_lang, ft)
+          return ok and lang or ft
+        end
+      end
+
       require('telescope').setup({
         vimgrep_arguments = {
-          "rg",
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-          "--smart-case",
-          "--trim",
+          'rg',
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case',
+          '--trim',
+        },
+        extensions = {
+          ['ui-select'] = { require('telescope.themes').get_dropdown() },
         },
       })
 
-      -- Enable telescope fzf native, if installed
+      -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension('fzf'))
       pcall(require('telescope').load_extension('luasnip'))
       pcall(require('telescope').load_extension('git_worktree'))
+      pcall(require('telescope').load_extension('ui-select'))
 
+      -- See `:help telescope.builtin`
       local builtin = require('telescope.builtin')
 
       -- Search Key-binds
@@ -52,19 +65,19 @@ return {
       vim.keymap.set('n', '<leader>sg', builtin.git_files, { desc = '[S]earch [G]it files' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', "<leader>sl", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>",  { desc = '[S]earch [L]ive Grep'})
+      vim.keymap.set('n', '<leader>sl', "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>",  { desc = '[S]earch [L]ive Grep'})
       vim.keymap.set('n', '<leader>sp', function() builtin.grep_string({ search = vim.fn.input("Grep > ") }) end,
         { desc = '[S]earch [P]roject files for string' })
       -- prime
 
       -- To discuss and remove
       -- vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { desc = '[S]earch by [G]rep' })
 
       vim.keymap.set('n', '<leader>pg', builtin.git_files, { desc = '[P]roject [G]it files' })
       vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = '[P]roject [F]iles' })
       vim.keymap.set('n', '<leader>ps', function()
-        builtin.grep_string({ search = vim.fn.input("Grep > ") })
+        builtin.grep_string({ search = vim.fn.input('Grep > ') })
       end,
       { desc = '[P]roject [S]earch for string'})
 
@@ -84,12 +97,12 @@ return {
       -- fuzzy find in current file
       function SearchFile()
         -- You can pass additional configuration to telescope to change theme, layout, etc.
-        local opt = { sorting_strategy = "ascending", prompt_position = "top" }
+        local opt = { sorting_strategy = 'ascending', prompt_position = 'top' }
         require('telescope.builtin').current_buffer_fuzzy_find(opt)
       end
 
-      vim.keymap.set('n', '<leader>fs', "<cmd>lua SearchFile()<CR>", { desc = '[/] Fuzzily search in current buffer' })
-      vim.keymap.set('n', '<C-f>', "<cmd>lua SearchFile()<CR>", { desc = '[/] Fuzzily search in current buffer' })
+      vim.keymap.set('n', '<leader>fs', '<cmd>lua SearchFile()<CR>', { desc = '[/] Fuzzily search in current buffer' })
+      vim.keymap.set('n', '<C-f>', '<cmd>lua SearchFile()<CR>', { desc = '[/] Fuzzily search in current buffer' })
     end
   },
 }
