@@ -21,7 +21,7 @@ return {
         'ruff', -- python
       },
       -- auto-install configured formatters & linters (with none-ls)
-      automatic_installation = true,
+      automatic_installation = false,
     }
 
     local sources = {
