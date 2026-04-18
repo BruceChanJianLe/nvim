@@ -15,7 +15,7 @@ return {
       ensure_installed = {
         -- 'checkmake', -- make files
         -- 'prettier', -- ts/js formatter (requires npm, avoiding for now)
-        'stylua',   -- lua formatter
+        -- 'stylua',   -- lua formatter
         -- 'eslint_d', -- ts/js linter
         'shfmt',
         'ruff', -- python
