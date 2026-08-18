@@ -45,11 +45,13 @@ return {
         },
       })
 
-      -- Enable Telescope extensions if they are installed
-      pcall(require('telescope').load_extension('fzf'))
-      pcall(require('telescope').load_extension('luasnip'))
-      pcall(require('telescope').load_extension('git_worktree'))
-      pcall(require('telescope').load_extension('ui-select'))
+      -- Enable Telescope extensions if they are installed.
+      for _, ext in ipairs { 'fzf', 'luasnip', 'git_worktree', 'ui-select' } do
+        local ok, err = pcall(require('telescope').load_extension, ext)
+        if not ok then
+          vim.notify(('telescope: extension %q unavailable: %s'):format(ext, err), vim.log.levels.WARN)
+        end
+      end
 
       -- See `:help telescope.builtin`
       local builtin = require('telescope.builtin')
