@@ -7,7 +7,7 @@ return {
     lazy = false,
     opts = {
       picker = { enabled = true },
-      notifier = { enabled = true }, -- replaces vim.notify (was nvim-notify)
+      notifier = { enabled = true },
     },
     config = function(_, opts)
       require('snacks').setup(opts)
