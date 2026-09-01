@@ -82,6 +82,8 @@ when none is configured.
 ## Checking what's going on
 
 - `:checkhealth vim.lsp` - active clients, and why a server did or didn't start
+- `:lsp restart [name]` - restart a server (e.g. clangd after a cmake build); built into nvim
+- `:lsp restart` - restart all servers; built into nvim
 - `:checkhealth lspconfig` - what nvim-lspconfig detects
 - `command -v <binary>` in the shell - is the binary actually on PATH
 - Remember: a missing binary fails *silently*. "No completions in X files"
