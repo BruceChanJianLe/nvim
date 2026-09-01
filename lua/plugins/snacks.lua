@@ -7,6 +7,7 @@ return {
     lazy = false,
     opts = {
       picker = { enabled = true },
+      notifier = { enabled = true }, -- replaces vim.notify (was nvim-notify)
     },
     config = function(_, opts)
       require('snacks').setup(opts)
@@ -46,6 +47,10 @@ return {
         { desc = '[/] Fuzzily search in current buffer' })
       vim.keymap.set('n', '<C-f>', function() Snacks.picker.lines() end,
         { desc = '[/] Fuzzily search in current buffer' })
+
+      -- Clear notifications
+      vim.keymap.set({ 'n', 'v' }, '<leader><leader>c', function() Snacks.notifier.hide() end,
+        { desc = '[C]lear Notifications' })
     end
   },
 }
