@@ -26,8 +26,8 @@ return {
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim',       opts = {} },
 
-      -- Allows extra capabilities provided by nvim-cmp
-      'hrsh7th/cmp-nvim-lsp',
+      -- Allows extra capabilities provided by blink.cmp
+      'saghen/blink.cmp',
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -82,7 +82,7 @@ return {
 
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
@@ -109,7 +109,7 @@ return {
           -- code, if the language server you are using supports them
 
           -- This may be unwanted, since they displace some of your code
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
@@ -125,10 +125,8 @@ return {
 
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP specification.
-      --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-      --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      --  blink.cmp adds completion-related capabilities, which we broadcast to the servers.
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -244,129 +242,68 @@ return {
 
   -- Autocompletion
   {
-    'hrsh7th/nvim-cmp',
+    'saghen/blink.cmp',
     event = 'InsertEnter',
+    -- Pinning a release tag downloads the prebuilt fuzzy-matcher binary;
+    -- if unavailable it warns and falls back to the pure-Lua matcher
+    version = '1.*',
     dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      {
-        'L3MON4D3/LuaSnip',
-        build = (function()
-          -- Build Step is needed for regex support in snippets.
-          -- This step is not supported in many windows environments.
-          -- Remove the below condition to re-enable on windows.
-          if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-            return
-          end
-          return 'make install_jsregexp'
-        end)(),
-        dependencies = {
-          {
-            -- 'rafamadriz/friendly-snippets',
-            'brucechanjianle/friendly-snippets',
-            config = function()
-              require('luasnip.loaders.from_vscode').lazy_load()
-            end,
-          },
-        },
-      },
-      'saadparwaiz1/cmp_luasnip',
-
-      -- Adds other completion capabilities.
-      --  nvim-cmp does not ship with all sources by default.
-      --  They are split into multiple repos for maintenance purposes.
-      'hrsh7th/cmp-nvim-lsp',
-
-      { 'hrsh7th/cmp-buffer' },                  -- Using words buffers
-      { 'hrsh7th/cmp-path' },                    -- Using file{name}s
-      { 'hrsh7th/cmp-nvim-lua' },                -- For when writing lua in nvim
-      { 'hrsh7th/cmp-nvim-lsp-signature-help' }, -- For function signature
-      { 'saadparwaiz1/cmp_luasnip' },            -- For lua snippets
+      -- Snippet definitions (vscode style), loaded by blink's built-in snippets source
+      'brucechanjianle/friendly-snippets',
     },
-    config = function()
-      local cmp = require 'cmp'
-      local luasnip = require 'luasnip'
-      luasnip.config.setup {}
+    opts = {
+      keymap = {
+        -- 'default' preset: <C-n>/<C-p> select, <C-y> accept, <C-Space> menu/docs, <C-e> hide
+        preset = 'default',
 
-      cmp.setup {
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
+        -- Scroll the documentation window [b]ack / [f]orward
+        ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
+
+        -- Jump through snippet fields, else move the cursor a line down/up
+        ['<C-j>'] = {
+          'snippet_forward',
+          function()
+            local cursor = vim.api.nvim_win_get_cursor(0)
+            if cursor[1] < vim.api.nvim_buf_line_count(0) then
+              vim.api.nvim_win_set_cursor(0, { cursor[1] + 1, cursor[2] })
+            end
+            return true
           end,
         },
-        completion = { completeopt = 'menu,menuone,noinsert' },
-
-        mapping = cmp.mapping.preset.insert {
-          -- Select the [n]ext item
-          ['<C-n>'] = cmp.mapping.select_next_item(),
-          -- Select the [p]revious item
-          ['<C-p>'] = cmp.mapping.select_prev_item(),
-
-          -- Scroll the documentation window [b]ack / [f]orward
-          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-d>'] = cmp.mapping.scroll_docs(4),
-
-          -- Accept ([y]es) the completion.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
-          -- Manually trigger a completion from nvim-cmp.
-          ['<C-Space>'] = cmp.mapping.complete {},
-          ['<C-j>'] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              -- Move the cursor one character to the down
-              local cursor = vim.api.nvim_win_get_cursor(0)
-              -- cursor[1] is the line number (1-based), cursor[2] is the column number (1-based)
-
-              -- Get the total number of lines in the buffer
-              local total_lines = vim.api.nvim_buf_line_count(0)
-
-              -- Check if the cursor is already at the bottom line
-              if cursor[1] < total_lines then
-                -- Move the cursor down by one line
-                vim.api.nvim_win_set_cursor(0, { cursor[1] + 1, cursor[2] })
-              end
+        ['<C-k>'] = {
+          'snippet_backward',
+          function()
+            local cursor = vim.api.nvim_win_get_cursor(0)
+            if cursor[1] > 1 then
+              vim.api.nvim_win_set_cursor(0, { cursor[1] - 1, cursor[2] })
             end
-          end, { 'i', 's' }),
-          ['<C-k>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              -- Move the cursor one character to the up
-              local cursor = vim.api.nvim_win_get_cursor(0)
-              -- cursor[1] is the line number (1-based), cursor[2] is the column number (1-based)
-
-              -- Check if the cursor is already at the top line
-              if cursor[1] > 1 then
-                -- Move the cursor up by one line
-                vim.api.nvim_win_set_cursor(0, { cursor[1] - 1, cursor[2] })
-              end
-            end
-          end, { 'i', 's' }),
-
-          -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-          --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+            return true
+          end,
         },
-        sources = {
-          {
-            name = 'lazydev',
-            -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-            group_index = 0,
-          },
-          { name = 'nvim_lsp',               keyword_length = 4 },
-          { name = 'luasnip',                keyword_length = 4 },
-          { name = 'buffer',                 keyword_length = 4 },
-          { name = 'path',                   keyword_length = 4 },
-          { name = 'nvim_lsp_signature_help' },
-        },
+      },
 
-        experimental = {
-          -- Display virutal text
-          -- This feature conflict with copilot.vim's preview
-          -- Set to false if using copilot.vim
-          ghost_text = { true, hl_group = 'LineNr' }
-        }
-      }
-    end,
+      completion = {
+        -- Preselect the first item but only insert on accept (old 'noinsert' behavior)
+        list = { selection = { preselect = true, auto_insert = false } },
+        documentation = { auto_show = true },
+        ghost_text = { enabled = true },
+      },
+
+      -- Function signature while typing arguments (was cmp-nvim-lsp-signature-help)
+      signature = { enabled = true },
+
+      sources = {
+        default = { 'lazydev', 'lsp', 'snippets', 'buffer', 'path' },
+        providers = {
+          lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink', score_offset = 100 },
+          lsp = { min_keyword_length = 4 },
+          snippets = { min_keyword_length = 4 },
+          buffer = { min_keyword_length = 4 },
+          path = { min_keyword_length = 4 },
+        },
+      },
+    },
   },
 
 }
