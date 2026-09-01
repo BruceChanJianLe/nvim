@@ -73,18 +73,4 @@ return {
       vim.keymap.set('n', '[c', gitsigns.prev_hunk, { desc = '[J]ump to previous hunk' })
     end
   },
-
-  -- Prime worktrees!
-  {
-    'theprimeagen/git-worktree.nvim',
-    opts = {},
-    config = function()
-      vim.keymap.set({ 'n', 'v' }, "<leader>ws",
-        "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>", { desc = 'git [W]orktree [S]witch' })
-      vim.keymap.set({ 'n', 'v' }, "<leader>wc",
-        "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>",
-        { desc = 'git [W]orktree [C]reate' })
-    end
-  },
-
 }

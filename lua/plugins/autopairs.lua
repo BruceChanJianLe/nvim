@@ -21,7 +21,7 @@ return {
           javascript = { "string", "template_string" },
           java = false,
         },
-        disable_filetype = { "TelescopePrompt", "spectre_panel" },
+        disable_filetype = { "snacks_picker_input", "spectre_panel" },
         disable_in_macro = false,       -- disable when recording or executing a macro
         disable_in_visualblock = false, -- disable when insert after visual block mode
         disable_in_replace_mode = true,
