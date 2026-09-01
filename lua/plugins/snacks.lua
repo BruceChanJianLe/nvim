@@ -12,6 +12,12 @@ return {
           -- VSCode-like sidebar file tree (replaces neo-tree) [may want to remove this all together]
           explorer = {
             hidden = true, -- always show hidden files
+            win = {
+              -- <C-b> defaults to list_scroll_up inside pickers, which shadows
+              -- the global toggle; make it close the sidebar instead
+              list = { keys = { ['<c-b>'] = 'close' } },
+              input = { keys = { ['<c-b>'] = { 'close', mode = { 'n', 'i' } } } },
+            },
           },
         },
       },
