@@ -1,4 +1,11 @@
 -- LSP Plugins
+
+-- Only suggest after 4 typed chars when typing a plain word, but suggest
+-- immediately after a trigger character or on manual <C-Space>
+local function min_keyword_length(ctx)
+  return ctx.trigger.initial_kind == 'keyword' and 4 or 0
+end
+
 return {
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -17,15 +24,9 @@ return {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
-      'williamboman/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
-
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       opts = {} },
-
+      { 'j-hui/fidget.nvim', opts = {} },
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
     },
@@ -128,46 +129,25 @@ return {
       --  blink.cmp adds completion-related capabilities, which we broadcast to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+      -- Broadcast the extra capabilities to every server
+      vim.lsp.config('*', { capabilities = capabilities })
 
-      --  Add any additional override configuration in the following tables. Available keys are:
+      -- Setup Language servers
+      -- ======================
+      -- install them on the system yourself (see LSP_SETUP.md).
+
+      -- The value table overrides the defaults that nvim-lspconfig ships for
+      -- that server. Available keys are:
       --  - cmd (table): Override the default command used to start the server
       --  - filetypes (table): Override the default list of associated filetypes for the server
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-
-      -- Servers managed by Mason (auto-installed)
       local servers = {
-        -- gopls = {},
         -- rust_analyzer = {},
+        -- gopls = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-
-        -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
-
-        lua_ls = {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
-        },
-      }
-
-      -- Servers installed system-wide (apt, etc.) - Mason will NOT touch these
-      local system_servers = {
         clangd = {},
         cmake = {},
         pylsp = {
@@ -186,41 +166,20 @@ return {
             },
           },
         },
-      }
-
-      --  Easily manage external editor tooling such as LSP servers,
-      --  DAP servers, linters, and formatters through a single interface
-      require('mason').setup()
-
-      -- You can add other tools here that you want Mason to install
-      -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        -- Formatters used by conform.nvim
-        'stylua', -- Lua
-        'ruff',   -- Python
-        'shfmt',  -- Shell
-      })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-      -- servers for mason to handle
-      require('mason-lspconfig').setup {
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for tsserver)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            vim.lsp.config(server_name, server)
-            vim.lsp.enable(server_name)
-          end,
+        lua_ls = {
+          settings = {
+            Lua = {
+              completion = {
+                callSnippet = 'Replace',
+              },
+              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+              -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
         },
       }
 
-      -- system wide server setup
-      for server_name, server in pairs(system_servers) do
-        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+      for server_name, server in pairs(servers) do
         vim.lsp.config(server_name, server)
         vim.lsp.enable(server_name)
       end
@@ -297,10 +256,10 @@ return {
         default = { 'lazydev', 'lsp', 'snippets', 'buffer', 'path' },
         providers = {
           lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink', score_offset = 100 },
-          lsp = { min_keyword_length = 4 },
-          snippets = { min_keyword_length = 4 },
-          buffer = { min_keyword_length = 4 },
-          path = { min_keyword_length = 4 },
+          lsp = { min_keyword_length = min_keyword_length },
+          snippets = { min_keyword_length = min_keyword_length },
+          buffer = { min_keyword_length = min_keyword_length },
+          path = { min_keyword_length = min_keyword_length },
         },
       },
     },
