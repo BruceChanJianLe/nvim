@@ -2,6 +2,7 @@
 return {
   {
     'theprimeagen/harpoon',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {},
     config = function()
       local mark = require("harpoon.mark")

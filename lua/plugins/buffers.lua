@@ -37,7 +37,7 @@ return {
           tab_size = 21,
           diagnostics = false,    -- | "nvim_lsp" | "coc",
           diagnostics_update_in_insert = false,
-          offsets = { { filetype = "neo-tree", text = "EXPLORER", text_align = "left", padding = 1 } },
+          offsets = { { filetype = "snacks_layout_box", text = "EXPLORER", text_align = "left", padding = 1 } },
           show_buffer_icons = true,
           show_buffer_close_icons = true,
           show_close_icon = true,

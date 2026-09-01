@@ -6,7 +6,15 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      picker = { enabled = true },
+      picker = {
+        enabled = true,
+        sources = {
+          -- VSCode-like sidebar file tree (replaces neo-tree) [may want to remove this all together]
+          explorer = {
+            hidden = true, -- always show hidden files
+          },
+        },
+      },
       notifier = { enabled = true },
     },
     config = function(_, opts)
@@ -51,6 +59,15 @@ return {
       -- Clear notifications
       vim.keymap.set({ 'n', 'v' }, '<leader><leader>c', function() Snacks.notifier.hide() end,
         { desc = '[C]lear Notifications' })
+
+      -- File explorer sidebar (replaces neo-tree) [may want to remove this all together]
+      local function explorer_toggle()
+        vim.cmd('stopinsert')
+        local p = Snacks.picker.get({ source = 'explorer' })[1]
+        if p then p:close() else Snacks.explorer() end
+      end
+      vim.keymap.set('n', '<leader>pv', function() Snacks.explorer() end, { desc = '[P]roject [V]iew' })
+      vim.keymap.set({ 'n', 'i', 'v' }, '<C-b>', explorer_toggle, { desc = 'Follow vscode convention' })
     end
   },
 }

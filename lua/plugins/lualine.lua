@@ -67,7 +67,7 @@ return {
         theme = 'vscode',
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
-        disabled_filetypes = { "dashboard", "neo-tree", "NvimTree", "Outline" },
+        disabled_filetypes = { "dashboard", "snacks_picker_list", "snacks_layout_box", "NvimTree", "Outline" },
         always_divide_middle = true,
       },
       sections = {

@@ -1,7 +1,4 @@
 vim.g.mapleader = " "
--- project view
-vim.keymap.set("n", "<leader>pv", "<cmd>Neotree focus <CR>", { desc = '[P]roject [V]iew' })
-vim.keymap.set({ "n", "i", "v" }, "<C-b>", "<cmd>Neotree toggle<CR><Esc>", { desc = 'Follow vscode convention' })
 
 -- move entire line in visual mode
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = 'move entire line down in visual mode' })
