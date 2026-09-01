@@ -215,3 +215,8 @@ vim.keymap.set("i", "<A-l>", "<C-Right>")
 vim.keymap.set("i", "<A-h>", "<C-Left>")
 -- Backspace entire word
 vim.keymap.set("i", "<M-BS>", "<C-W>")
+
+-- Toggle comment (natively)
+vim.keymap.set("n", "<C-_>", "gcc", { remap = true, desc = "Toggle comment line" })
+vim.keymap.set("x", "<C-_>", "gc", { remap = true, desc = "Toggle comment selection" })
+vim.keymap.set("i", "<C-_>", "<Esc>gccgi", { remap = true, desc = "Toggle comment line" })
