@@ -1,3 +1,9 @@
+-- Slim mode: no plugins at all, just options + keymaps
+-- NVIM_SLIM=1 nvim
+if vim.env.NVIM_SLIM then
+  return
+end
+
 -- Clone lazy plugin manager if not already available
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
