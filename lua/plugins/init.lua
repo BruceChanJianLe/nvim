@@ -9,14 +9,10 @@ return {
   },
 
   -- Text object manipulation
-  { 'tpope/vim-surround' },
-  { 'wellle/targets.vim' },
-
-
-  -- Use by tmux resurrect
   {
-    'tpope/vim-obsession',
-    dependencies = { 'tpope/vim-repeat' }
+    'tpope/vim-surround',
+    dependencies = { 'tpope/vim-repeat' },
   },
-
+  { 'wellle/targets.vim' },
+  { 'tpope/vim-obsession' },
 }
