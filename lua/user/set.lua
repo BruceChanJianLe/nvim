@@ -14,6 +14,15 @@ vim.opt.expandtab = true
 -- use vim indent
 vim.opt.smartindent = true
 
+-- show invisible characters (toggle with <leader>ti, see remap.lua)
+vim.opt.list = true
+vim.opt.listchars = {
+  trail = "·",
+  -- space = "·",
+  tab = "→",
+  eol = "¶",
+}
+
 -- wrap for long lines
 vim.opt.wrap = true
 

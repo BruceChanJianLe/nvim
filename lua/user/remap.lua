@@ -109,6 +109,11 @@ end
 
 vim.keymap.set("n", "<leader>tn", ":lua ToggleLineNumber()<CR>", { desc = '[T]oggle Line [N]umber'})
 
+-- toggle invisible characters (listchars are set in set.lua)
+vim.keymap.set("n", "<leader>ti", function()
+  vim.opt.list = not vim.opt.list:get()
+end, { desc = "[T]oggle [I]nvisible Characters" })
+
 -- toggle line wrap
 function ToggleTextWrap()
   if (vim.o.wrap) then
