@@ -24,6 +24,13 @@ return {
       notifier = { enabled = true },
       -- Inline images (kitty graphics protocol - works in ghostty; tmux needs allow-passthrough)
       image = { enabled = true },
+      -- Only highlight the indent scope the cursor is in (no full rainbow guides)
+      indent = {
+        enabled = true,
+        indent = { enabled = false }, -- no guides on every level
+        scope = { enabled = true },   -- just the current cursor scope
+        animate = { enabled = false }, -- instantaneous
+      },
       -- Bottom split terminal (replaces toggleterm)
       terminal = {
         win = { position = 'bottom', height = 15 },
