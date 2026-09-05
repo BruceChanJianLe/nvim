@@ -13,6 +13,8 @@ return {
         { '<leader>d', group = '[D]ocument' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch/[S]et' },
+        -- [T]oggle group: tn numbers, ti invisibles, tw wrap, tp paste,
+        -- tt terminal, tc ts-context, th inlay hints, ts C++ src/header
         { '<leader>t', group = '[T]oggle' },
         { '<leader>p', group = '[P]roject' },
         -- { '<leader>w', group = '[W]orkspace' },

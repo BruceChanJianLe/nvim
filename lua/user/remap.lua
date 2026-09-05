@@ -127,6 +127,7 @@ end
 
 vim.keymap.set({"n", "v"}, "<A-z>", ":lua ToggleTextWrap()<CR>")
 vim.keymap.set("i", "<A-z>", "<Esc>:lua ToggleTextWrap()<CR>a")
+vim.keymap.set("n", "<leader>tw", ":lua ToggleTextWrap()<CR>", { desc = '[T]oggle Text [W]rap' })
 
 -- toggle paste format
 function TogglePasteFormat()
@@ -139,7 +140,7 @@ function TogglePasteFormat()
   end
 end
 
-vim.keymap.set("n", "<leader><leader>p", ":lua TogglePasteFormat()<CR>")
+vim.keymap.set("n", "<leader>tp", ":lua TogglePasteFormat()<CR>", { desc = '[T]oggle [P]aste Format' })
 
 -- jumping between panes
 vim.keymap.set("n", "<leader>h", ":wincmd h<CR>")
