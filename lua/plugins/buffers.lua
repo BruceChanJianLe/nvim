@@ -6,7 +6,6 @@ return {
     tag = 'v4.7.0',
     dependencies = {
       'nvim-tree/nvim-web-devicons',
-      'moll/vim-bbye'
     },
     config = function()
       local status_ok, bufferline = pcall(require, "bufferline")
@@ -17,10 +16,10 @@ return {
       bufferline.setup {
         options = {
           numbers = "none",                     -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-          close_command = "Bdelete! %d",        -- can be a string | function, see "Mouse actions"
-          right_mouse_command = nil,            -- can be a string | function, see "Mouse actions"
-          left_mouse_command = "buffer %d",     -- can be a string | function, see "Mouse actions"
-          middle_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
+          close_command = function(n) Snacks.bufdelete({ buf = n, force = true }) end,
+          right_mouse_command = nil,        -- can be a string | function, see "Mouse actions"
+          left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
+          middle_mouse_command = function(n) Snacks.bufdelete({ buf = n, force = true }) end,
           -- NOTE: this plugin is designed with this icon in mind,
           -- and so changing this is NOT recommended, this is intended
           -- as an escape hatch for people who cannot bear it for whatever reason
@@ -115,8 +114,8 @@ return {
         },
       }
 
-      vim.keymap.set("n", "<leader>c", "<cmd>Bdelete<CR>")
-      vim.keymap.set("n", "<leader>C", "<cmd>Bwipeout<CR>")
+      vim.keymap.set("n", "<leader>c", function() Snacks.bufdelete() end, { desc = 'Close buffer' })
+      vim.keymap.set("n", "<leader>C", function() Snacks.bufdelete({ wipe = true }) end, { desc = 'Wipeout buffer' })
       -- Next and prev buffer
       vim.keymap.set({ "n", 'v' }, "<leader>.", "<cmd>bn<cr>")
       vim.keymap.set({ "n", 'v' }, "<leader>,", "<cmd>bp<cr>")
