@@ -22,6 +22,10 @@ return {
         },
       },
       notifier = { enabled = true },
+      -- Bottom split terminal (replaces toggleterm)
+      terminal = {
+        win = { position = 'bottom', height = 15 },
+      },
     },
     config = function(_, opts)
       require('snacks').setup(opts)
@@ -74,6 +78,10 @@ return {
       end
       vim.keymap.set('n', '<leader>pv', function() Snacks.explorer() end, { desc = '[P]roject [V]iew' })
       vim.keymap.set({ 'n', 'i', 'v' }, '<C-b>', explorer_toggle, { desc = 'Follow vscode convention' })
+
+      -- Toggle terminal
+      vim.keymap.set({ 'n', 'i', 'v', 't' }, '<M-C-Space>', function() Snacks.terminal.toggle() end,
+        { desc = 'Toggle terminal' })
     end
   },
 }
