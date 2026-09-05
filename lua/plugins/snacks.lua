@@ -22,6 +22,8 @@ return {
         },
       },
       notifier = { enabled = true },
+      -- Inline images (kitty graphics protocol - works in ghostty; tmux needs allow-passthrough)
+      image = { enabled = true },
       -- Bottom split terminal (replaces toggleterm)
       terminal = {
         win = { position = 'bottom', height = 15 },
