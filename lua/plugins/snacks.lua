@@ -55,13 +55,60 @@ return {
       vim.keymap.set('n', '<leader>sW', function() Snacks.picker.grep({ search = vim.fn.expand('<cWORD>') }) end,
         { desc = '[S]earch current big [W]ORD' })
       vim.keymap.set('n', '<leader>sf', function() Snacks.picker.files() end, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>sl', function() Snacks.picker.grep() end, { desc = '[S]earch [L]ive Grep' })
+      -- rg args work in the prompt after ' -- ', e.g: pattern -- -g=*.lua -t py -i
+      vim.keymap.set('n', '<leader>sl', function() Snacks.picker.grep() end,
+        { desc = '[S]earch [L]ive Grep (pattern -- rg-args)' })
       vim.keymap.set('n', '<leader>sp', function() Snacks.picker.grep({ search = vim.fn.input('Grep > ') }) end,
         { desc = '[S]earch [P]roject files for string' })
 
       -- fuzzy find in current file
       vim.keymap.set('n', '<C-f>', function() Snacks.picker.lines() end,
         { desc = '[/] Fuzzily search in current buffer' })
+
+      -- Snippet browser: lists blink.cmp's snippets
+      -- for the current filetype, previews the body, expands on confirm
+      local function snippet_picker()
+        local registry = require('blink.cmp.sources.snippets.default.registry').new({ friendly_snippets = true })
+        local ft = vim.bo.filetype
+        local snippets = registry:get_global_snippets()
+        if ft ~= '' then
+          vim.list_extend(snippets, registry:get_snippets_for_ft(ft))
+        end
+        local items = {}
+        for _, s in ipairs(snippets) do
+          local body = type(s.body) == 'table' and table.concat(s.body, '\n') or s.body
+          local desc = type(s.description) == 'table' and s.description[1] or s.description or ''
+          local prefixes = type(s.prefix) == 'table' and s.prefix or { s.prefix }
+          for _, prefix in ipairs(prefixes) do
+            items[#items + 1] = {
+              idx = #items + 1,
+              text = prefix .. ' ' .. desc, -- what the fuzzy matcher sees
+              label = prefix,
+              desc = desc,
+              body = body,
+              preview = { text = body, ft = ft },
+            }
+          end
+        end
+        Snacks.picker({
+          title = 'Snippets (' .. (ft == '' and 'global' or ft) .. ')',
+          items = items,
+          format = function(item)
+            return {
+              { ('%-24s'):format(item.label), 'SnacksPickerLabel' },
+              { item.desc,                    'SnacksPickerComment' },
+            }
+          end,
+          preview = 'preview',
+          confirm = function(picker, item)
+            picker:close()
+            -- resolve vscode-style variables (CURRENT_YEAR, TM_FILENAME, ...)
+            -- which vim.snippet.expand does not substitute itself
+            vim.snippet.expand(registry:expand_vars(item.body, vim.uv.hrtime()))
+          end,
+        })
+      end
+      vim.keymap.set('n', '<leader>sn', snippet_picker, { desc = '[S]earch s[N]ippets' })
 
       -- Clear notifications
       vim.keymap.set({ 'n', 'v' }, '<leader><leader>c', function() Snacks.notifier.hide() end,
