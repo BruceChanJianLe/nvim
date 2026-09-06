@@ -148,7 +148,11 @@ return {
         -- gopls = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
-        clangd = {},
+        clangd = {
+          -- Do not auto-insert #includes on completion; adding headers stays
+          -- an explicit code action (<leader>ca)
+          cmd = { 'clangd', '--header-insertion=never' },
+        },
         cmake = {},
         pylsp = {
           settings = {
