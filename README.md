@@ -4,20 +4,53 @@ A nvim config that aims to be as easy to use as vscode.
 
 ## LSP Support
 
-LSP | Remarks
---- | ---
-c++ | Supported across U20, U22, U24 and Arch
-python | Supported for U24 and Arch
+Language servers are managed natively (`vim.lsp.config()` / `vim.lsp.enable()`,
+no Mason): nvim runs whatever binary is on `$PATH`. See [LSP_SETUP.md](LSP_SETUP.md)
+for the mental model and how to add a new server.
+
+Server | Language | Typical install
+--- | --- | ---
+clangd | C/C++ | apt
+pylsp | Python | apt
+cmake-language-server | CMake | nix or pip
+lua-language-server | Lua | nix (not in apt)
 
 ## Dependencies
 
 ```bash
-sudo apt-get install python3-venv luarocks imagemagick clangd
-# Python lsp
-sudo apt install python3-pyflakes python3-pycodestyle python3-autopep8 python3-yapf python3-mccabe python3-pylsp-mypy python3-pylsp-black python3-pylsp-isort python3-pylsp
+sudo apt-get install python3-venv clangd
+# Python lsp (its lint/format plugins are disabled in lsp.lua; ruff formats instead)
+sudo apt install python3-pylsp
 ```
 
-For telescope to work please install [`ripgrep`](https://github.com/BurntSushi/ripgrep/releases) and [`fd`](https://github.com/sharkdp/fd/releases). May need to alias fdfind -> fd on Ubuntu.
+Formatters used by conform.nvim (`<leader>f`): `stylua`, `ruff`, `shfmt` -
+install via nix, cargo, pipx, or apt (see [LSP_SETUP.md](LSP_SETUP.md)).
+
+For the snacks picker to work please install [`ripgrep`](https://github.com/BurntSushi/ripgrep/releases) and [`fd`](https://github.com/sharkdp/fd/releases). May need to alias fdfind -> fd on Ubuntu.
+
+## Live Grep
+
+`<leader>sl` opens live grep (snacks picker on top of ripgrep): every keystroke
+re-runs `rg` across the project, so results update as you type.
+
+The prompt also accepts raw ripgrep arguments after a ` -- ` separator:
+
+```
+pattern -- <rg args>
+```
+
+Examples:
+
+| Prompt | Meaning |
+| --- | --- |
+| `TODO` | plain search for TODO |
+| `TODO -- -g=*.lua` | only in lua files |
+| `def -- -t py -i` | python files, case-insensitive |
+| `foo -- -g='!test/**'` | exclude the test directory (quotes work) |
+
+Related keymaps: `<leader>sp` greps for a prompted string, `<leader>sw` / `<leader>sW`
+grep the word / WORD under the cursor, and `<C-f>` fuzzy-searches lines in the
+current buffer only.
 
 ## Notes
 
