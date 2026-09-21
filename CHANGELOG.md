@@ -2,6 +2,10 @@
 
 Date-based log of notable config changes. No versioning, newest first.
 
+## 2026-09-21 - Minor changes
+- Use `<C-l>` to clear instead of `<leader><leader>c`
+- Disable `<C-c>` to exit oil.nvim
+
 ## 2026-09-06 - The big slim-down
 
 Config went from ~54 to ~32 installed plugins (25 to 18 spec files), with no
