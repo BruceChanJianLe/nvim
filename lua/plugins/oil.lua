@@ -14,6 +14,9 @@ return {
       win_options = {
         wrap = true,
       },
+      keymaps = {
+        ["<C-c>"] = false,
+      },
     },
     config = function(_, opts)
       require('oil').setup(opts)
