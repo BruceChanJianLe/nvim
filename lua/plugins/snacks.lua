@@ -111,8 +111,8 @@ return {
       vim.keymap.set('n', '<leader>sn', snippet_picker, { desc = '[S]earch s[N]ippets' })
 
       -- Clear notifications
-      vim.keymap.set({ 'n', 'v' }, '<leader><leader>c', function() Snacks.notifier.hide() end,
-        { desc = '[C]lear Notifications' })
+      vim.keymap.set({ 'n', 'v' }, '<C-l>', function() Snacks.notifier.hide() end,
+        { desc = 'C[l]ear Notifications' })
 
       -- File explorer sidebar (replaces neo-tree) [may want to remove this all together]
       local function explorer_toggle()
