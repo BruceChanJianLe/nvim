@@ -71,7 +71,7 @@ return {
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+          map('<leader>ta', vim.lsp.buf.code_action, 'Toggle Code [A]ction list')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -150,7 +150,7 @@ return {
 
         clangd = {
           -- Do not auto-insert #includes on completion; adding headers stays
-          -- an explicit code action (<leader>ca)
+          -- an explicit code action (<leader>ta)
           cmd = { 'clangd', '--header-insertion=never' },
         },
         cmake = {},
