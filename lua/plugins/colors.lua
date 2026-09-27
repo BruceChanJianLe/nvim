@@ -30,7 +30,8 @@ return {
       -- Disable nvim-tree background color
       disable_nvimtree_bg = false,
     },
-    config  = function()
+    config  = function(_, opts)
+      require('vscode').setup(opts)
       ColorMyPencils()
     end
   },
