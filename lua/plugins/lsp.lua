@@ -149,8 +149,6 @@ return {
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
         clangd = {
-          -- Do not auto-insert #includes on completion; adding headers stays
-          -- an explicit code action (<leader>ta)
           cmd = { 'clangd', '--header-insertion=never' },
         },
         cmake = {},
@@ -212,7 +210,8 @@ return {
     version = '1.*',
     dependencies = {
       -- Snippet definitions (vscode style), loaded by blink's built-in snippets source
-      'brucechanjianle/friendly-snippets',
+      -- 'brucechanjianle/friendly-snippets',
+      'rafamadriz/friendly-snippets',
     },
     opts = {
       keymap = {
