@@ -2,6 +2,22 @@
 
 Date-based log of notable config changes. No versioning, newest first.
 
+## 2026-11-05 - Nested snippets and header switch fix
+
+- Snippet engine is now **mini.snippets** (blink `mini_snippets` preset) instead
+  of the built-in `vim.snippet`, which tracks only one snippet at a time.
+  Expanding a snippet inside another one now works: when the inner snippet
+  finishes, `<C-j>` moves on to the outer snippet's next field. Pure Lua, no
+  build step; friendly-snippets is still the snippet source.
+- A snippet ends when `<C-j>` reaches its final position (`$0`), instead of
+  wrapping back to the first field.
+- Leaving to Normal mode ends all open snippets, as `vim.snippet` did.
+- Snippet browser on `<leader>sn` now lists and expands through mini.snippets,
+  so picker-inserted snippets nest and jump the same way as completion ones.
+- Fixed `<leader>ts` (C/C++ source/header switch): nvim-lspconfig renamed
+  `:ClangdSwitchSourceHeader` to `:LspClangdSwitchSourceHeader`. The keymap is
+  now buffer-local and set for any buffer attached to clangd (C as well as C++).
+
 ## 2026-09-21 - Minor changes
 - Use `<C-l>` to clear instead of `<leader><leader>c`
 - Disable `<C-c>` to exit oil.nvim

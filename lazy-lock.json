@@ -13,6 +13,7 @@
   "lualine.nvim": { "branch": "master", "commit": "221ce6b2d999187044529f49da6554a92f740a96" },
   "luvit-meta": { "branch": "main", "commit": "7edcd52ac6f2acc2f83f0cc27ac989a142408fbf" },
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
+  "mini.snippets": { "branch": "main", "commit": "810c9aeb976791e3c329e0f073c82dab70fed8a7" },
   "nui.nvim": { "branch": "main", "commit": "10fc361835c856ba4233ef5ea135b919bf3dce97" },
   "nvim-autopairs": { "branch": "master", "commit": "3172f40c16563db871a58f20d205c710ad782311" },
   "nvim-base16": { "branch": "master", "commit": "7183774e90841f4bd27a47cb6e75cf532fd1192d" },
