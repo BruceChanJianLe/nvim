@@ -65,30 +65,22 @@ return {
       vim.keymap.set('n', '<C-f>', function() Snacks.picker.lines() end,
         { desc = '[/] Fuzzily search in current buffer' })
 
-      -- Snippet browser: lists blink.cmp's snippets
-      -- for the current filetype, previews the body, expands on confirm
+      -- Snippet browser: lists mini.snippets' snippets (same as completion)
+      -- for the current buffer, previews the body, expands on confirm
       local function snippet_picker()
-        local registry = require('blink.cmp.sources.snippets.default.registry').new({ friendly_snippets = true })
+        local mini_snippets = require('mini.snippets')
         local ft = vim.bo.filetype
-        local snippets = registry:get_global_snippets()
-        if ft ~= '' then
-          vim.list_extend(snippets, registry:get_snippets_for_ft(ft))
-        end
         local items = {}
-        for _, s in ipairs(snippets) do
-          local body = type(s.body) == 'table' and table.concat(s.body, '\n') or s.body
-          local desc = type(s.description) == 'table' and s.description[1] or s.description or ''
-          local prefixes = type(s.prefix) == 'table' and s.prefix or { s.prefix }
-          for _, prefix in ipairs(prefixes) do
-            items[#items + 1] = {
-              idx = #items + 1,
-              text = prefix .. ' ' .. desc, -- what the fuzzy matcher sees
-              label = prefix,
-              desc = desc,
-              body = body,
-              preview = { text = body, ft = ft },
-            }
-          end
+        for _, s in ipairs(mini_snippets.expand({ match = false, insert = false })) do
+          local desc = s.desc or ''
+          items[#items + 1] = {
+            idx = #items + 1,
+            text = s.prefix .. ' ' .. desc, -- what the fuzzy matcher sees
+            label = s.prefix,
+            desc = desc,
+            snippet = s,
+            preview = { text = s.body, ft = ft },
+          }
         end
         Snacks.picker({
           title = 'Snippets (' .. (ft == '' and 'global' or ft) .. ')',
@@ -102,9 +94,9 @@ return {
           preview = 'preview',
           confirm = function(picker, item)
             picker:close()
-            -- resolve vscode-style variables (CURRENT_YEAR, TM_FILENAME, ...)
-            -- which vim.snippet.expand does not substitute itself
-            vim.snippet.expand(registry:expand_vars(item.body, vim.uv.hrtime()))
+            -- also resolves vscode-style variables (CURRENT_YEAR, TM_FILENAME, ...);
+            -- deferred so the picker's exit to Normal mode doesn't end the snippet
+            vim.schedule(function() mini_snippets.default_insert(item.snippet) end)
           end,
         })
       end

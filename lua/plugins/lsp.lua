@@ -208,11 +208,50 @@ return {
     -- if unavailable it warns and falls back to the pure-Lua matcher
     version = '1.*',
     dependencies = {
-      -- Snippet definitions (vscode style), loaded by blink's built-in snippets source
-      -- 'brucechanjianle/friendly-snippets',
-      'rafamadriz/friendly-snippets',
+      -- Snippet engine. Unlike the built-in vim.snippet, supports nested.
+      {
+        'nvim-mini/mini.snippets',
+        dependencies = {
+          -- Snippet definitions (vscode style)
+          'rafamadriz/friendly-snippets',
+        },
+        config = function()
+          local snippets = require('mini.snippets')
+          snippets.setup({
+            snippets = { snippets.gen_loader.from_lang() },
+            mappings = { expand = '', jump_next = '', jump_prev = '' },
+          })
+
+          -- Reaching $0 ends the snippet and resumes the outer (nested) one,
+          -- instead of wrapping around to the first tabstop
+          vim.api.nvim_create_autocmd('User', {
+            pattern = 'MiniSnippetsSessionJump',
+            callback = function(args)
+              if args.data.tabstop_to == '0' then snippets.session.stop() end
+            end,
+          })
+
+          -- Leaving to Normal mode ends all snippets, like the built-in vim.snippet
+          vim.api.nvim_create_autocmd('User', {
+            pattern = 'MiniSnippetsSessionStart',
+            callback = function()
+              vim.api.nvim_create_autocmd('ModeChanged', {
+                pattern = '*:n',
+                once = true,
+                callback = function()
+                  while snippets.session.get() do
+                    snippets.session.stop()
+                  end
+                end,
+              })
+            end,
+          })
+        end,
+      },
     },
     opts = {
+      snippets = { preset = 'mini_snippets' },
+
       keymap = {
         -- 'default' preset: <C-n>/<C-p> select, <C-y> accept, <C-Space> menu/docs, <C-e> hide
         preset = 'default',
